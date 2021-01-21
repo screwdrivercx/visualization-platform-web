@@ -19,12 +19,12 @@ export class AddEditComponent implements OnInit {
         private router: Router,
         private accountService: AccountService,
         private alertService: AlertService
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;
-        
+
         // password not required in edit mode
         const passwordValidators = [Validators.minLength(6)];
         if (this.isAddMode) {
@@ -35,7 +35,8 @@ export class AddEditComponent implements OnInit {
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             username: ['', Validators.required],
-            password: ['', passwordValidators]
+            password: ['', passwordValidators],
+            role: ['', Validators.pattern("user|admin|designer")]
         });
 
         if (!this.isAddMode) {
@@ -89,11 +90,17 @@ export class AddEditComponent implements OnInit {
                 next: () => {
                     this.alertService.success('Update successful', { keepAfterRouteChange: true });
                     this.router.navigate(['../../'], { relativeTo: this.route });
+                    console.log(this.form.value.username, this.accountService.userValue.username, this.form.value.role);
+                    if ((this.form.value.username == this.accountService.userValue.username) &&
+                        this.form.value.role != "admin") {
+                        this.accountService.logout();
+                    }
                 },
                 error: error => {
                     this.alertService.error(error);
                     this.loading = false;
                 }
             });
+
     }
 }

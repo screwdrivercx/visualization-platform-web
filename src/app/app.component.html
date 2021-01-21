@@ -1,10 +1,10 @@
 <!-- nav -->
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="!user">
   <div class="navbar-nav">
-    <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-    <a class="nav-item nav-link" routerLink="/tutorial" routerLinkActive="active">Tutorial</a>
-    <a class="nav-item nav-link" routerLink="/api" routerLinkActive="active">API</a>
-    <a class="nav-item nav-link" target="_blank" rel="noopener noreferrer"  href="https://github.com/nonyo555/Visualization-Platform">Source</a>   
+    <a class="nav-item nav-link px-3" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+    <a class="nav-item nav-link px-3" routerLink="/tutorial" routerLinkActive="active">Tutorial</a>
+    <a class="nav-item nav-link px-3" routerLink="/api" routerLinkActive="active">API</a>
+    <a class="nav-item nav-link px-3" target="_blank" rel="noopener noreferrer"  href="https://github.com/nonyo555/Visualization-Platform">Source</a>   
   </div>
   <ul class="navbar-nav ml-auto">
     <a class="nav-item nav-link" routerLink="/account/register" routerLinkActive="active">Register</a>
@@ -22,7 +22,7 @@
   </ul>
 </nav>
 
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user&&user.role=='user'">
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user&&(user.role=='user'||user.role=='designer')">
   <div class="navbar-nav">
       <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
       <a class="nav-item nav-link" routerLink="/tutorial" routerLinkActive="active">Tutorial</a>
