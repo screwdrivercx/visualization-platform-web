@@ -1,14 +1,44 @@
 <!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="!user">
   <div class="navbar-nav">
-      <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-      <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Users</a>
-      <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+    <a class="nav-item nav-link" routerLink="/tutorial" routerLinkActive="active">Tutorial</a>
+    <a class="nav-item nav-link" routerLink="/api" routerLinkActive="active">API</a>
+    <a class="nav-item nav-link" target="_blank" rel="noopener noreferrer"  href="https://github.com/nonyo555/Visualization-Platform">Source</a>   
   </div>
+  <ul class="navbar-nav ml-auto">
+    <a class="nav-item nav-link" routerLink="/account/register" routerLinkActive="active">Register</a>
+    <a routerLink="/account/login"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log in</button></a>
+  </ul>
 </nav>
+
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user&&user.role=='admin'">
+  <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Users</a>
+  </div>
+  <ul class="navbar-nav ml-auto">
+    <a class="nav-item nav-link" (click)="logout()">Log out</a>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user&&user.role=='user'">
+  <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a class="nav-item nav-link" routerLink="/tutorial" routerLinkActive="active">Tutorial</a>
+      <a class="nav-item nav-link" routerLink="/api" routerLinkActive="active">API</a>
+      <a class="nav-item nav-link" target="_blank" rel="noopener noreferrer"  href="https://github.com/nonyo555/Visualization-Platform">Source</a>   
+      <a class="nav-item nav-link" routerLink="/generate" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Generate</a>
+  </div>
+  <ul class="navbar-nav ml-auto">
+    <a class="nav-item nav-link" (click)="logout()">Log out</a>
+  </ul>
+</nav>
+
 
 <!-- main app container -->
 <div class="app-container" [ngClass]="{ 'bg-light': user }">
+  <!--img src="../assets/image/bg.jpeg" class="background-img"-->
   <alert></alert>
   <router-outlet></router-outlet>
 </div>
