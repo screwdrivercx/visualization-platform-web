@@ -8,7 +8,6 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './_components';
 import { HomeComponent } from './home';
-import { GenerateComponent } from './generate/generate.component';
 import { MainComponent } from './main/main.component';
 import { ApiComponent } from './api/api.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -27,7 +26,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         AppComponent,
         AlertComponent,
         HomeComponent,
-        GenerateComponent,
         MainComponent,
         ApiComponent,
     ],

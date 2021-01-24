@@ -1,4 +1,37 @@
-<div class="col-md-6 offset-md-3 mt-5">
+<div class="card">
+    <h4 class="card-header">Visualizations</h4>
+    <div class="card-body">
+        <!--a routerLink="create" class="btn btn-sm btn-success mb-2">Add Template</a-->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 40%">Visualization Name</th>
+                    <th style="width: 40%">Status</th>
+                    <th style="width: 10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let template of templates">
+                    <td>{{template.TemplateName}}</td>
+                    <td>{{template.status}}</td>
+                    <td style="white-space: nowrap">
+                        <a routerLink="detail" class="btn btn-sm btn-primary mr-1" [disabled]="template.status!='active'">Create</a>
+                        <!--button (click)="deleteUser(user.id,user.username)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting">
+                    <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!user.isDeleting">Delete</span>
+                </button-->
+                    </td>
+                </tr>
+                <tr *ngIf="!templates">
+                    <td colspan="4" class="text-center">
+                        <span class="spinner-border spinner-border-lg align-center"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!--div class="col-md-6 offset-md-3 mt-5">
     <div class="card">
         <h4 class="card-header">Generate Visualization</h4>
         <div class="card-body">
@@ -25,4 +58,4 @@
             </form>
         </div>
     </div>
-</div>
+</div-->

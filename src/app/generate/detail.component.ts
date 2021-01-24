@@ -3,8 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { TemplateService } from '../_services'
 
-@Component({ templateUrl: 'generate.component.html' })
-export class GenerateComponent implements OnInit {
+@Component({ templateUrl: 'detail.component.html' })
+export class DetailComponent implements OnInit {
   form: FormGroup;
   loading = false;
   submitted = false;
@@ -13,9 +13,6 @@ export class GenerateComponent implements OnInit {
   constructor(private TemplateService : TemplateService) { }
 
   ngOnInit(): void {
-    this.TemplateService.getAll()
-      .pipe(first())
-      .subscribe(templates => this.templates = templates);
   }
 
   onSubmit(){
