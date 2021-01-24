@@ -10,7 +10,7 @@ const routes: Routes = [
         path: '', component: LayoutComponent,
         children: [
             { path: '', component: GenerateComponent },
-            { path: 'detail', component: DetailComponent },
+            { path: 'detail/:TemplateName', component: DetailComponent },
         ]
     }
 ];
