@@ -6,6 +6,7 @@ import { LayoutComponent } from './layout.component';
 import { GenerateComponent } from './generate.component';
 import { GenerateRoutingModule } from './generate-routing.module'
 import { DetailComponent } from './detail.component';
+import { ResultComponent } from './result.component'
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import { DetailComponent } from './detail.component';
     declarations: [
         LayoutComponent,
         GenerateComponent,
-        DetailComponent
+        DetailComponent,
+        ResultComponent
     ]
 })
 export class GenerateModule { }

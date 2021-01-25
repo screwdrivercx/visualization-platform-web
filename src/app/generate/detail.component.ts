@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
 import { AlertService, VgenService } from '../_services'
 
 @Component({ templateUrl: 'detail.component.html' })
@@ -19,12 +18,11 @@ export class DetailComponent implements OnInit {
     private router: Router,
     private alertService: AlertService,
     private vgenService: VgenService
-  ) {
-    this.TemplateName = this.actRoute.snapshot.params.TemplateName;
-    this.inputText = "Select Data File";
-  }
+  ) { }
 
   ngOnInit(): void {
+    this.TemplateName = this.actRoute.snapshot.params.TemplateName;
+    this.inputText = "Select Data File";
     this.form = this.formBuilder.group({
       data: ['', Validators.required],
       config: [''],
@@ -64,8 +62,16 @@ export class DetailComponent implements OnInit {
       .subscribe({
         next: (res) => {
           console.log(res);
-          this.alertService.success('Generate Visualization successful', { keepAfterRouteChange: true });
-          //this.router.navigate(['../login'], { relativeTo: this.route });
+          console.log(res["refId"]);
+          if(res["refId"]){
+            this.alertService.success('Generate Visualization successful', { keepAfterRouteChange: true });
+            this.router.navigate(['/generate/result/',res["refId"]], { relativeTo: this.route });
+          }
+          else {
+            this.alertService.error(res["message"],{ keepAfterRouteChange: true});
+            this.loading = false;
+          }
+          
         },
         error: error => {
           this.alertService.error(error);
