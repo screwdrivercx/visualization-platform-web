@@ -9,6 +9,7 @@ export class HomeComponent implements OnInit{
     user: User;
     items = null;
     role;
+    count : Number;
 
     constructor(private accountService: AccountService,
                 private vgenService: VgenService) { }
@@ -19,8 +20,12 @@ export class HomeComponent implements OnInit{
         if(this.accountService.getRole() == "user" || this.accountService.getRole() == "designer"){
             this.vgenService.getAll()
             .pipe(first())
-            .subscribe(items => this.items = items);
+            .subscribe(items => {
+                this.items = items;
+                this.count = items.length;
+            });
         }
+        
     }
 
 
