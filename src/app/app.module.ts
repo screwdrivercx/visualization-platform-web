@@ -12,6 +12,7 @@ import { MainComponent } from './main/main.component';
 import { ApiComponent } from './api/api.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         AppRoutingModule,
         MDBBootstrapModule.forRoot(),
         BrowserAnimationsModule,
+        NgbModule
     ],
     declarations: [
         AppComponent,

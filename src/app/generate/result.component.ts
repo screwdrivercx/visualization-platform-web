@@ -9,8 +9,10 @@ export class ResultComponent implements OnInit {
     loading = false;
     src: any;
     file: File;
-    fileUrl: String;
+    fileUrl: string;
     tryDoctype: any;
+    pptUrl : string;
+    refId : String;
 
     constructor(
         private actRoute: ActivatedRoute,
@@ -32,8 +34,10 @@ export class ResultComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.refId = this.actRoute.snapshot.params.refId;
+        this.pptUrl = this.vgenService.getPptUrl(this.refId);
         //this.src = this.sanitizer.bypassSecurityTrustResourceUrl(`${environment.apiUrl}/api/vgenerate/d3/${this.actRoute.snapshot.params.refId}`);
-        this.vgenService.getByRefId(this.actRoute.snapshot.params.refId)
+        this.vgenService.getByRefId(this.refId)
             .subscribe(src => {
                 console.log("src : ", src);
                 this.file = this.blobToFile(src, "tmp.html");

@@ -1,13 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { first } from 'rxjs/operators';
 
 import { User } from '../_models';
-import { AccountService } from '../_services';
+import { AccountService,VgenService } from '../_services';
 
 @Component({ templateUrl: 'home.component.html' })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
     user: User;
+    items = null;
+    role;
 
-    constructor(private accountService: AccountService) {
+    constructor(private accountService: AccountService,
+                private vgenService: VgenService) { }
+
+    ngOnInit(): void {
+        this.role = this.accountService.getRole();
         this.user = this.accountService.userValue;
+        if(this.accountService.getRole() == "user" || this.accountService.getRole() == "designer"){
+            this.vgenService.getAll()
+            .pipe(first())
+            .subscribe(items => this.items = items);
+        }
     }
+
+
 }

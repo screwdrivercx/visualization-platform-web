@@ -2,5 +2,46 @@
     <div class="container">
         <h1>Hi {{user.firstName}}!</h1>
         <p>You're logged in with {{user.role}} role</p>
+
+        <div class="card" *ngIf="role == 'user' ||  role == 'designer'">
+            <h4 class="card-header">Your Visualization</h4>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%">Refid</th>
+                            <th style="width: 30%">Template</th>
+                            <th style="width: 30%">Status</th>
+                            <th style="width: 10%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of items">
+                            <td>{{item.refId}}</td>
+                            <td>{{item.template}}</td>
+                            <td>{{item.status}}</td>
+                            <td style="white-space: nowrap">
+                                <a routerLink="/generate/result/{{item.refId}}" class="btn btn-sm btn-success mr-1">View</a>
+                                <div ngbDropdown class="d-inline-block">
+                                    <button class="btn btn-sm btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>Manage</button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1" ngbDropdownMenu>
+                                            <button class="dropdown-item">Edit</button>
+                                            <button class="dropdown-item">Delete</button>
+                                            <button class="dropdown-item">Deactivate</button>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Copy ppt url</a>
+                                        </div>
+                                </div>      
+                            </td>
+                        </tr>
+                        <tr *ngIf="!items">
+                            <td colspan="4" class="text-center">
+                                <span class="spinner-border spinner-border-lg align-center"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,33 +1,93 @@
 <div class="card">
     <h4 class="card-header">Visualizations</h4>
     <div class="card-body">
-        <!--a routerLink="create" class="btn btn-sm btn-success mb-2">Add Template</a-->
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th style="width: 40%">Visualization Name</th>
-                    <th style="width: 40%">Status</th>
-                    <th style="width: 10%"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let template of templates">
-                    <td>{{template.TemplateName}}</td>
-                    <td>{{template.status}}</td>
-                    <td style="white-space: nowrap">
-                        <a [routerLink]="['/generate/detail/',template.TemplateName]" class="btn btn-sm btn-primary mr-1" [disabled]="template.status!='active'">Create</a>
-                        <!--button (click)="deleteUser(user.id,user.username)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting">
+
+        <mat-horizontal-stepper #stepper linear>
+            <mat-step [stepControl]="firstFormGroup" [editable]="true">
+                <ng-template matStepLabel>Select Template</ng-template>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 40%">Visualization Name</th>
+                            <th style="width: 40%">Status</th>
+                            <th style="width: 10%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let template of templates">
+                            <td>{{template.TemplateName}}</td>
+                            <td>{{template.status}}</td>
+                            <td style="white-space: nowrap">
+                                <button class="btn btn-sm btn-primary mr-1" (click)="setValue(template.TemplateName,stepper)">Select</button>
+                                <!--a [routerLink]="['/generate/detail/',template.TemplateName]" class="btn btn-sm btn-primary mr-1" [disabled]="template.status!='active'">Create</a-->
+                                <!--button (click)="deleteUser(user.id,user.username)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting">
                     <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
                     <span *ngIf="!user.isDeleting">Delete</span>
                 </button-->
-                    </td>
-                </tr>
-                <tr *ngIf="!templates">
-                    <td colspan="4" class="text-center">
-                        <span class="spinner-border spinner-border-lg align-center"></span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!templates">
+                            <td colspan="4" class="text-center">
+                                <span class="spinner-border spinner-border-lg align-center"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </mat-step>
+
+            <mat-step [stepControl]="secondFormGroup" [editable]="true">
+                <ng-template matStepLabel>Input Data & Config</ng-template>
+                <form [formGroup]="secondFormGroup">
+                    <div class="form-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" formControlName="data"
+                                (change)="onFileChange('data',$event)" [ngClass]="{ 'is-invalid': (submitted && f.data.errors) || (submitted && !isDataValid)}"
+                                accept=".csv,.json" required>
+                            <label class="custom-file-label" for="customFile">{{dataInputText}}</label>
+                            <div *ngIf="submitted && f.data.errors" class="invalid-feedback">
+                                <div *ngIf="f.data.errors.required">Data File is required</div>
+                            </div>
+                            <div *ngIf="(submitted && !isDataValid) && !f.data.errors" class="invalid-feedback">
+                                <div *ngIf="!isDataValid">Please input only .csv or .json file.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="customFile" formControlName="config"
+                                (change)="onFileChange('config',$event)" [ngClass]="{ 'is-invalid': (submitted && f.config.errors) || (submitted && !isConfigValid)}"
+                                accept=".csv,.json" required>
+                            <label class="custom-file-label" for="customFile">{{configInputText}}</label>
+                            <div *ngIf="submitted && f.config.errors" class="invalid-feedback">
+                                <div *ngIf="f.config.errors.required">Config File is required</div>
+                            </div>
+                            <div *ngIf="(submitted && !isConfigValid) && !f.config.errors" class="invalid-feedback">
+                                <div *ngIf="!isConfigValid">Please input only .csv or .json file.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button [disabled]="loading" class="btn btn-primary" (click)="submitSecond(stepper)">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            Next
+                        </button>
+                        <!--a routerLink="/generate" class="btn btn-link">Cancel</a-->
+                    </div>
+                </form>
+            </mat-step>
+
+            <mat-step>
+                <ng-template matStepLabel>Summary</ng-template>
+                <p>Template : {{firstFormGroup.get("templateName").value}}</p>
+                <p>Data : {{dataInputText}}</p>
+                <p>Config : {{configInputText}}</p>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button class="btn btn-primary" (click)="onSubmit()">Generate</button>
+                </div>
+            </mat-step>
+
+        </mat-horizontal-stepper>
     </div>
 </div>
