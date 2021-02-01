@@ -26,7 +26,7 @@
                                 <div ngbDropdown class="d-inline-block">
                                     <button class="btn btn-sm btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>Manage</button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenu1" ngbDropdownMenu>
-                                            <button class="dropdown-item">Edit</button>
+                                            <a routerLink="/generate/edit/{{item.refId}}"><button class="dropdown-item">Edit</button></a>
                                             <button class="dropdown-item">Delete</button>
                                             <button class="dropdown-item">Deactivate</button>
                                             <div class="dropdown-divider"></div>

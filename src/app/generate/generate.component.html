@@ -17,8 +17,11 @@
                         <tr *ngFor="let template of templates">
                             <td>{{template.TemplateName}}</td>
                             <td>{{template.status}}</td>
+                            <td><p class="text-success" *ngIf="template.TemplateName == vname">Current</p></td>
                             <td style="white-space: nowrap">
-                                <button class="btn btn-sm btn-primary mr-1" (click)="setValue(template.TemplateName,stepper)">Select</button>
+                                    <button class="btn btn-sm btn-primary mr-1" (click)="setValue(template.TemplateName,stepper)">Select</button>
+                                    
+                                
                                 <!--a [routerLink]="['/generate/detail/',template.TemplateName]" class="btn btn-sm btn-primary mr-1" [disabled]="template.status!='active'">Create</a-->
                                 <!--button (click)="deleteUser(user.id,user.username)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting">
                     <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
@@ -42,8 +45,9 @@
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" formControlName="data"
                                 (change)="onFileChange('data',$event)" [ngClass]="{ 'is-invalid': (submitted && f.data.errors) || (submitted && !isDataValid)}"
-                                accept=".csv,.json" required>
-                            <label class="custom-file-label" for="customFile">{{dataInputText}}</label>
+                                accept=".csv,.json">
+                            <label *ngIf="!isEditMode || isDataFileChange" class="custom-file-label" for="customFile">{{dataInputText}}</label>
+                            <label *ngIf="isEditMode && !isDataFileChange" class="custom-file-label text-secondary" for="customFile">current : {{dataInputText}}</label>
                             <div *ngIf="submitted && f.data.errors" class="invalid-feedback">
                                 <div *ngIf="f.data.errors.required">Data File is required</div>
                             </div>
@@ -56,8 +60,9 @@
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="customFile" formControlName="config"
                                 (change)="onFileChange('config',$event)" [ngClass]="{ 'is-invalid': (submitted && f.config.errors) || (submitted && !isConfigValid)}"
-                                accept=".csv,.json" required>
-                            <label class="custom-file-label" for="customFile">{{configInputText}}</label>
+                                accept=".csv,.json">
+                            <label *ngIf="!isEditMode || isConfigFileChange" class="custom-file-label" for="customFile">{{configInputText}}</label>
+                            <label *ngIf="isEditMode && !isConfigFileChange" class="custom-file-label text-secondary" for="customFile">current : {{configInputText}}</label>
                             <div *ngIf="submitted && f.config.errors" class="invalid-feedback">
                                 <div *ngIf="f.config.errors.required">Config File is required</div>
                             </div>
@@ -79,7 +84,7 @@
 
             <mat-step>
                 <ng-template matStepLabel>Summary</ng-template>
-                <p>Template : {{firstFormGroup.get("templateName").value}}</p>
+                <p>Template : {{firstFormGroup.get("vname").value}}</p>
                 <p>Data : {{dataInputText}}</p>
                 <p>Config : {{configInputText}}</p>
                 <div>

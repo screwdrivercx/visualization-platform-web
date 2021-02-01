@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { first } from 'rxjs/operators';
+import { buffer, first } from 'rxjs/operators';
 import { Router,ActivatedRoute } from '@angular/router';
 import { VgenService,TemplateService,AlertService } from '../_services';
 
@@ -11,14 +11,18 @@ export class GenerateComponent implements OnInit {
   loading = false;
   submitted = false;
   templates = null;
-  isLinear = false;
   isDataValid = true;
-  isConfigValid = true;
+  isConfigValid= true;
+  isEditMode: Boolean
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   dataInputText: string;
   configInputText: string;
-  
+  refId: string;
+  vname: string;
+  isDataFileChange = false;
+  isConfigFileChange = false;
+  preconfig : Object;
 
   constructor(
     private route : ActivatedRoute,
@@ -33,22 +37,24 @@ export class GenerateComponent implements OnInit {
  
   setValue(value,stepper : MatStepper){
     this.firstFormGroup.patchValue({
-      templateName : value
+      vname : value
     })
-
+    this.vname = value;
     stepper.next();
   }
 
   onFileChange(type: string,event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      
+      console.log(file);
       if(type == "data"){
+        this.isDataFileChange = true;
         this.secondFormGroup.patchValue({
           dataFileSource: file
         });
         this.dataInputText = this.secondFormGroup.get("dataFileSource").value.name;
       } else{
+        this.isConfigFileChange = true;
         this.secondFormGroup.patchValue({
           configFileSource: file
         });
@@ -61,58 +67,92 @@ export class GenerateComponent implements OnInit {
   }
 
   submitSecond(stepper : MatStepper){
-    console.log("1");
     this.submitted = true;
-
     // stop here if form is invalid
+
+    console.log(this.f.data.errors);
     if (this.firstFormGroup.invalid || this.secondFormGroup.invalid) {
-      console.log("2");
       return;
     }
 
     if(this.dataInputText.split(".").pop() != "csv" && this.dataInputText.split(".").pop() != "json"){
-      console.log("3");
       this.isDataValid=false;
       return;
-      
     }
 
     if(this.configInputText.split(".").pop() != "csv" && this.configInputText.split(".").pop() != "json"){
-      console.log("4");
       this.isConfigValid = false;
       return;
     }
 
-    console.log("5");
-    this.isDataValid,this.isConfigValid = true;
-    console.log( this.isDataValid,this.isConfigValid);
+    console.log(this.secondFormGroup.get("dataFileSource").value);
+
+    this.isDataValid = this.isConfigValid = true;
     stepper.next();
   }
 
   ngOnInit(): void {
-    this.dataInputText = "Select Data File";
-    this.configInputText = "Select Config File"
-    this.firstFormGroup = this._formBuilder.group({
-      templateName: ['', Validators.required]
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      data: ['', Validators.required],
-      config: ['', Validators.required],
-      dataFileSource: ['', Validators.required],
-      configFileSource: ['', Validators.required]
-    });
-
+    this.refId = this.route.snapshot.params['refId'];
+    this.isEditMode = this.refId ? true : false;
     this.TemplateService.getAll()
       .pipe(first())
       .subscribe(templates => this.templates = templates);
+
+      this.dataInputText = "Select Data File";
+      this.configInputText = "Select Config File";
+
+      this.firstFormGroup = this._formBuilder.group({
+        vname: ['', Validators.required]
+      });
+
+      console.log(this.isEditMode);
+      if(!this.isEditMode){
+          this.secondFormGroup = this._formBuilder.group({
+          data: ['', Validators.required],
+          config: ['', Validators.required],
+          dataFileSource: ['', Validators.required],
+          configFileSource: ['', Validators.required]
+        });
+      }
+      
+    if(this.isEditMode){
+      this.secondFormGroup = this._formBuilder.group({
+          data: [''],
+          config: [''],
+          dataFileSource: [''],
+          configFileSource: ['']
+        });
+      this.vgenService.getPreconfig(this.refId).subscribe(preconfig  => {
+        console.log(preconfig);
+        this.preconfig = preconfig;
+        this.dataInputText = this.preconfig["dataFileName"];
+        this.configInputText = this.preconfig["configFileName"];
+        this.vname = this.preconfig["vname"];
+        this.firstFormGroup.patchValue({ vname : this.preconfig["vname"]});
+      })  
+    }
   }
 
+  public blobToFile = (theBlob: Blob, fileName:string): File => {
+    var b: any = theBlob;
+    //A Blob() is almost a File() - it's just missing the two properties below which we will add
+    b.lastModifiedDate = new Date();
+    b.name = fileName;
+
+    //Cast to a File() type
+    return <File>theBlob;
+}
+
   onSubmit(){
-    const formData = new FormData();
-    formData.append('dataset', this.secondFormGroup.get('dataFileSource').value);
-    formData.append('config', this.secondFormGroup.get('configFileSource').value);
+    
     this.loading = true;
-    this.vgenService.generate(this.firstFormGroup.get("templateName").value, formData)
+    const formData = new FormData();
+
+    if(!this.isEditMode){
+      formData.append('dataset', this.secondFormGroup.get('dataFileSource').value);
+      formData.append('config', this.secondFormGroup.get('configFileSource').value);
+
+      this.vgenService.generate(this.firstFormGroup.get("vname").value, formData)
       .subscribe({
         next: (res) => {
           console.log(res);
@@ -132,5 +172,34 @@ export class GenerateComponent implements OnInit {
           this.loading = false;
         }
       });
+    }
+    else{
+      var blob1 = new Blob([this.preconfig["data"]],{ type: this.dataInputText.split(".").pop() == "csv" ? 'application/vnd.ms-excel' : 'application/json'})
+      var blob2 = new Blob([this.preconfig["config"]],{ type: this.configInputText.split(".").pop() == "csv" ? 'application/vnd.ms-excel' : 'application/json'})
+      console.log(blob1,typeof(blob1))
+      console.log(blob2,typeof(blob2))
+      var dataFile = this.blobToFile(new Blob([this.preconfig["data"]]),this.dataInputText);
+      var configFile = this.blobToFile(new Blob([this.preconfig["config"]]),this.configInputText);
+
+      this.isDataFileChange && this.secondFormGroup.get("dataFileSource").value != '' ?
+        formData.append('dataset', this.secondFormGroup.get('dataFileSource').value) :
+        formData.append('dataset',blob1,this.dataInputText);           
+      this.isConfigFileChange && this.secondFormGroup.get["configFileSource"].value != '' ?
+        formData.append('config', this.secondFormGroup.get('configFileSource').value) :
+        formData.append('config',blob2,this.configInputText);   
+
+      this.vgenService.update(this.refId,this.vname, formData)
+      .subscribe({
+        next : (res) => {
+          console.log(res);
+        },
+        error: error => {
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      })  
+    }
+      
+    
   }
 }

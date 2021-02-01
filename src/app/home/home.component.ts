@@ -17,10 +17,10 @@ export class HomeComponent implements OnInit{
     ngOnInit(): void {
         this.role = this.accountService.getRole();
         this.user = this.accountService.userValue;
-        if(this.accountService.getRole() == "user" || this.accountService.getRole() == "designer"){
+        if(this.role == "user" || this.role == "designer"){
             this.vgenService.getAll()
             .pipe(first())
-            .subscribe(items => {
+            .subscribe((items: any[]) => {
                 this.items = items;
                 this.count = items.length;
             });

@@ -28,4 +28,12 @@ export class VgenService{
         let user = this.accountService.userValue;
         return `${environment.apiUrl}/api/vgenerate/d3/ppt/q?token=${user.token}&refId=${refId}`;
     }
+
+    getPreconfig(refId){
+        return this.http.get(`${environment.apiUrl}/api/vgenerate/preconfig/${refId}`);
+    }
+
+    update(refId,vname,formData){
+        return this.http.put(`${environment.apiUrl}/api/vgenerate/${refId}/${vname}`, formData)
+    }
 }
