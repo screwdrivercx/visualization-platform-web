@@ -85,8 +85,6 @@ export class GenerateComponent implements OnInit {
       return;
     }
 
-    console.log(this.secondFormGroup.get("dataFileSource").value);
-
     this.isDataValid = this.isConfigValid = true;
     stepper.next();
   }
@@ -105,7 +103,6 @@ export class GenerateComponent implements OnInit {
         vname: ['', Validators.required]
       });
 
-      console.log(this.isEditMode);
       if(!this.isEditMode){
           this.secondFormGroup = this._formBuilder.group({
           data: ['', Validators.required],
@@ -133,18 +130,7 @@ export class GenerateComponent implements OnInit {
     }
   }
 
-  public blobToFile = (theBlob: Blob, fileName:string): File => {
-    var b: any = theBlob;
-    //A Blob() is almost a File() - it's just missing the two properties below which we will add
-    b.lastModifiedDate = new Date();
-    b.name = fileName;
-
-    //Cast to a File() type
-    return <File>theBlob;
-}
-
   onSubmit(){
-    
     this.loading = true;
     const formData = new FormData();
 
@@ -176,15 +162,11 @@ export class GenerateComponent implements OnInit {
     else{
       var blob1 = new Blob([this.preconfig["data"]],{ type: this.dataInputText.split(".").pop() == "csv" ? 'application/vnd.ms-excel' : 'application/json'})
       var blob2 = new Blob([this.preconfig["config"]],{ type: this.configInputText.split(".").pop() == "csv" ? 'application/vnd.ms-excel' : 'application/json'})
-      console.log(blob1,typeof(blob1))
-      console.log(blob2,typeof(blob2))
-      var dataFile = this.blobToFile(new Blob([this.preconfig["data"]]),this.dataInputText);
-      var configFile = this.blobToFile(new Blob([this.preconfig["config"]]),this.configInputText);
 
       this.isDataFileChange && this.secondFormGroup.get("dataFileSource").value != '' ?
         formData.append('dataset', this.secondFormGroup.get('dataFileSource').value) :
         formData.append('dataset',blob1,this.dataInputText);           
-      this.isConfigFileChange && this.secondFormGroup.get["configFileSource"].value != '' ?
+      this.isConfigFileChange && this.secondFormGroup.get("configFileSource").value != '' ?
         formData.append('config', this.secondFormGroup.get('configFileSource').value) :
         formData.append('config',blob2,this.configInputText);   
 
@@ -192,6 +174,15 @@ export class GenerateComponent implements OnInit {
       .subscribe({
         next : (res) => {
           console.log(res);
+          console.log(res["refId"]);
+          if(res["refId"]){
+            this.alertService.success('Edit Visualization successful', { keepAfterRouteChange: true });
+            this.router.navigate(['/generate/result/',res["refId"]], { relativeTo: this.route });
+          }
+          else {
+            this.alertService.error(res["message"],{ keepAfterRouteChange: true});
+            this.loading = false;
+          }
         },
         error: error => {
           this.alertService.error(error);
@@ -199,7 +190,5 @@ export class GenerateComponent implements OnInit {
         }
       })  
     }
-      
-    
   }
 }

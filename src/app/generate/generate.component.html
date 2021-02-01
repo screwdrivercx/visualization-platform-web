@@ -89,7 +89,8 @@
                 <p>Config : {{configInputText}}</p>
                 <div>
                     <button mat-button matStepperPrevious>Back</button>
-                    <button class="btn btn-primary" (click)="onSubmit()">Generate</button>
+                    <button *ngIf="!isEditMode" class="btn btn-primary" (click)="onSubmit()">Generate</button>
+                    <button *ngIf="isEditMode" class="btn btn-primary" (click)="onSubmit()">Edit</button>
                 </div>
             </mat-step>
 

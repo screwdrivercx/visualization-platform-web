@@ -36,4 +36,8 @@ export class VgenService{
     update(refId,vname,formData){
         return this.http.put(`${environment.apiUrl}/api/vgenerate/${refId}/${vname}`, formData)
     }
+
+    delete(id){
+        return this.http.delete(`${environment.apiUrl}/api/vgenerate/${id}`)
+    }
 }
