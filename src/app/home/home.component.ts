@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
         autoplaySpeed: 5000,
         autoplayTimeout: 5000,
         autoplayHoverPause: true,
-        navSpeed: 700,
+        navSpeed: 1000,
         navText: ['', ''],
         responsive: {
             0: {
@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
     updateActivate(refId, status) {
         this.vgenService.updateActivate(refId, status)
             .subscribe(res => {
+                this.count = 0;
                 this.vgenService.getAll()
                     .subscribe((items: any[]) => {
                         items.forEach(item => {

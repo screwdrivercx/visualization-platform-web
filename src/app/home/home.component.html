@@ -11,7 +11,7 @@
 
     <div class="row p-4">
         <div class="col-md-8 mb-4">
-            <div *ngIf="count > 0" class="card mb-5">
+            <div *ngIf="count > 0" class="card mb-4">
                 <h4 class="card-header">Recently Generated Visualizations</h4>
                 <div class="card-body">
                     <div *ngIf="items">
@@ -148,11 +148,29 @@
                 </div>
             </div>
 
-            <div class="card" *ngIf="role == 'user' ||  role == 'designer'">
+            <div class="card mb-4" *ngIf="role == 'user' ||  role == 'designer'">
                 <h4 class="card-header">API references</h4>
                 <div class="card-body text-center">
-                    <p>Our platform can be access via. API <br>
+                    <p class="mt-2">Our platform can be access via API <br>
                         Learn more about our <a routerLink="/api">API documentation</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card" *ngIf="role == 'user' ||  role == 'designer'">
+                <h4 class="card-header">FAQ</h4>
+                <div class="card-body ml-5 mr-5 mt-3">
+                    <p class="mr-5"><strong>Q : What is Visualization Platform ?</strong><br>
+                        A : Visualization Platform is a platform that provide a way to create interactive visualization easily for everyone.
+                    </p>
+                    <p class="mr-5"><strong>Q : Why Visualization Platform ?</strong><br>
+                        A : You can create variety of interactive visualization. Just hand us some data and configuration. 
+                    </p>
+                    <p class="mr-5"><strong>Q : How can I create a visualization ?</strong><br>
+                        A : You can learn more about how to create a visualization <a routerLink="/tutorial"><u>Here</u></a>. We made a guide for you.  
+                    </p>
+                    <p class="mr-5"><strong>Q : I generated a visualization but nothing is showing, What I did wrong ?</strong><br>
+                        A : We require a specific data and config file format for each templates <a routerLink="/tutorial"><u>Learn more</u></a>. And we currently support only csv and json files. 
                     </p>
                 </div>
             </div>
