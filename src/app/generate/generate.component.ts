@@ -1,9 +1,10 @@
 import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { buffer, first } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import { Router,ActivatedRoute } from '@angular/router';
 import { VgenService,TemplateService,AlertService } from '../_services';
+import { environment } from 'src/environments/environment';
 
 @Component({ templateUrl: 'generate.component.html' })
 export class GenerateComponent implements OnInit {
@@ -23,6 +24,8 @@ export class GenerateComponent implements OnInit {
   isDataFileChange = false;
   isConfigFileChange = false;
   preconfig : Object;
+  status: string;
+  apiUrl = environment.apiUrl;
 
   constructor(
     private route : ActivatedRoute,
@@ -96,8 +99,8 @@ export class GenerateComponent implements OnInit {
       .pipe(first())
       .subscribe(templates => this.templates = templates);
 
-      this.dataInputText = "Select Data File";
-      this.configInputText = "Select Config File";
+      this.dataInputText = "Drag and drop Data file here or browse file";
+      this.configInputText = "Drag and drop Config file here or browse file";
 
       this.firstFormGroup = this._formBuilder.group({
         vname: ['', Validators.required]
@@ -170,7 +173,9 @@ export class GenerateComponent implements OnInit {
         formData.append('config', this.secondFormGroup.get('configFileSource').value) :
         formData.append('config',blob2,this.configInputText);   
 
-      this.vgenService.update(this.refId,this.vname, formData)
+      formData.append('vname',this.vname);
+
+      this.vgenService.update(this.refId, formData)
       .subscribe({
         next : (res) => {
           console.log(res);

@@ -33,11 +33,15 @@ export class VgenService{
         return this.http.get(`${environment.apiUrl}/api/vgenerate/preconfig/${refId}`);
     }
 
-    update(refId,vname,formData){
-        return this.http.put(`${environment.apiUrl}/api/vgenerate/${refId}/${vname}`, formData)
+    update(refId,formData){
+        return this.http.put(`${environment.apiUrl}/api/vgenerate/${refId}`, formData);
+    }
+
+    updateActivate(refId,status){
+        return this.http.put(`${environment.apiUrl}/api/vgenerate/activate/${refId}`, {status: status});
     }
 
     delete(id){
-        return this.http.delete(`${environment.apiUrl}/api/vgenerate/${id}`)
+        return this.http.delete(`${environment.apiUrl}/api/vgenerate/${id}`);
     }
 }

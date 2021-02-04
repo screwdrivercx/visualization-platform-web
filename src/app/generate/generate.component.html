@@ -1,16 +1,39 @@
-<div class="card">
-    <h4 class="card-header">Visualizations</h4>
+<div class="card min-vh-80">
+    <h4 class="card-header">Generate Visualizations</h4>
     <div class="card-body">
+        
+        <mat-horizontal-stepper #stepper linear >
+            <mat-step class="pl-3" [stepControl]="firstFormGroup" [editable]="true">
+                <ng-template matStepLabel><h5>Select Template</h5></ng-template>
+                    <div *ngIf="templates">
+                        <div class="row d-flex justify-content-start ml-5">
+                        <div *ngFor="let template of templates">
+                            <div class="card m-5" style="width: 20rem;">
+                                <img class="card-img-top" src="{{apiUrl}}/{{template.TemplateName}}.png"
+                                    alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{template.TemplateName}}</h5>
+                                    <p class="card-text">Interactive {{template.TemplateName}}</p>
+                                    <div class="row pl-3 pr-3"> 
+                                        <button class="btn btn-sm btn-primary" (click)="setValue(template.TemplateName,stepper)">Select</button>
+                                        <p class="text-success ml-auto" *ngIf="template.TemplateName == vname">Current</p>
+                                    </div>                           
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <mat-horizontal-stepper #stepper linear>
-            <mat-step [stepControl]="firstFormGroup" [editable]="true">
-                <ng-template matStepLabel>Select Template</ng-template>
-                <table class="table table-striped">
+
+
+
+
+                <!--table class="table table-striped mt-5">
                     <thead>
                         <tr>
                             <th style="width: 40%">Visualization Name</th>
                             <th style="width: 40%">Status</th>
-                            <th style="width: 10%"></th>
+                            <th style="width: 20%"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -22,11 +45,11 @@
                                     <button class="btn btn-sm btn-primary mr-1" (click)="setValue(template.TemplateName,stepper)">Select</button>
                                     
                                 
-                                <!--a [routerLink]="['/generate/detail/',template.TemplateName]" class="btn btn-sm btn-primary mr-1" [disabled]="template.status!='active'">Create</a-->
-                                <!--button (click)="deleteUser(user.id,user.username)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting">
+                                <a [routerLink]="['/generate/detail/',template.TemplateName]" class="btn btn-sm btn-primary mr-1" [disabled]="template.status!='active'">Create</a>
+                                <button (click)="deleteUser(user.id,user.username)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting">
                     <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
                     <span *ngIf="!user.isDeleting">Delete</span>
-                </button-->
+                </button>
                             </td>
                         </tr>
                         <tr *ngIf="!templates">
@@ -35,19 +58,26 @@
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </table-->
             </mat-step>
 
             <mat-step [stepControl]="secondFormGroup" [editable]="true">
-                <ng-template matStepLabel>Input Data & Config</ng-template>
+                <ng-template matStepLabel><h5>Input Data & Config</h5></ng-template>
+                <div class="col-md-8 offset-md-2">
                 <form [formGroup]="secondFormGroup">
-                    <div class="form-group">
-                        <div class="custom-file">
+                    <div class="form-group mt-5 mb-5">
+                        <h6>Please Input Data File :</h6>
+                        <div class="custom-file">              
                             <input type="file" class="custom-file-input" formControlName="data"
-                                (change)="onFileChange('data',$event)" [ngClass]="{ 'is-invalid': (submitted && f.data.errors) || (submitted && !isDataValid)}"
+                                (change)="onFileChange('data',$event)"
+                                [ngClass]="{ 'is-invalid': (submitted && f.data.errors) || (submitted && !isDataValid)}"
                                 accept=".csv,.json">
-                            <label *ngIf="!isEditMode || isDataFileChange" class="custom-file-label" for="customFile">{{dataInputText}}</label>
-                            <label *ngIf="isEditMode && !isDataFileChange" class="custom-file-label text-secondary" for="customFile">current : {{dataInputText}}</label>
+                            <label *ngIf="!isEditMode && !isDataFileChange" class="custom-file-label text-secondary"
+                                for="customFile">{{dataInputText}}      <mat-icon>library_add</mat-icon></label>
+                            <label *ngIf="!isEditMode && isDataFileChange" class="custom-file-label"
+                                for="customFile">{{dataInputText}}</label>
+                            <label *ngIf="isEditMode && !isDataFileChange" class="custom-file-label text-secondary"
+                                for="customFile">current : {{dataInputText}}</label>
                             <div *ngIf="submitted && f.data.errors" class="invalid-feedback">
                                 <div *ngIf="f.data.errors.required">Data File is required</div>
                             </div>
@@ -56,13 +86,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="custom-file">
+                    <div class="form-group mt-5 mb-5">
+                        <h6>Please Input Config File :</h6>
+                        <div class="custom-file"> 
                             <input type="file" class="custom-file-input" id="customFile" formControlName="config"
-                                (change)="onFileChange('config',$event)" [ngClass]="{ 'is-invalid': (submitted && f.config.errors) || (submitted && !isConfigValid)}"
-                                accept=".csv,.json">
-                            <label *ngIf="!isEditMode || isConfigFileChange" class="custom-file-label" for="customFile">{{configInputText}}</label>
-                            <label *ngIf="isEditMode && !isConfigFileChange" class="custom-file-label text-secondary" for="customFile">current : {{configInputText}}</label>
+                                (change)="onFileChange('config',$event)"
+                                [ngClass]="{ 'is-invalid': (submitted && f.config.errors) || (submitted && !isConfigValid)}"
+                                accept=".csv,.json">    
+                            <label *ngIf="!isEditMode && !isConfigFileChange" class="custom-file-label text-secondary"
+                                for="customFile">{{configInputText}}      <mat-icon>library_add</mat-icon></label>    
+                            <label *ngIf="!isEditMode && isConfigFileChange" class="custom-file-label"
+                                for="customFile">{{configInputText}}</label>
+                            <label *ngIf="isEditMode && !isConfigFileChange" class="custom-file-label text-secondary"
+                                for="customFile">current : {{configInputText}}</label>
                             <div *ngIf="submitted && f.config.errors" class="invalid-feedback">
                                 <div *ngIf="f.config.errors.required">Config File is required</div>
                             </div>
@@ -72,26 +108,44 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button mat-button matStepperPrevious>Back</button>
+                        <div class="row">
+                            <button mat-button matStepperPrevious>Back</button>
                         <button [disabled]="loading" class="btn btn-primary" (click)="submitSecond(stepper)">
                             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                             Next
                         </button>
+                            <a class="ml-auto pr-3 mt-2" routerLink="/tutorial"><u>What is Data and Config File?</u></a>
+                        </div>
+                        
                         <!--a routerLink="/generate" class="btn btn-link">Cancel</a-->
                     </div>
                 </form>
+            </div>
             </mat-step>
 
             <mat-step>
-                <ng-template matStepLabel>Summary</ng-template>
-                <p>Template : {{firstFormGroup.get("vname").value}}</p>
-                <p>Data : {{dataInputText}}</p>
-                <p>Config : {{configInputText}}</p>
+                <ng-template matStepLabel><h5>Summary</h5></ng-template>
+                <div class="col-md-4 offset-md-4 text-center">
+                    <img class="card-img-top" src="{{apiUrl}}/{{firstFormGroup.get('vname').value}}.png" alt="template img">
+                    <div>
+                        <p><u>Please confirm your settings for the visualization before generate.</u></p>
+                        <div class="row">
+                            <p>Template    : <strong>   {{firstFormGroup.get("vname").value}}</strong></p>
+                        </div>
+                        <div class="row">
+                            <p>Data File   : <strong>   {{dataInputText}}</strong></p>
+                        </div>
+                        <div class="row">
+                            <p>Config File : <strong>   {{configInputText}}</strong></p>
+                        </div>
+                    </div>
                 <div>
                     <button mat-button matStepperPrevious>Back</button>
-                    <button *ngIf="!isEditMode" class="btn btn-primary" (click)="onSubmit()">Generate</button>
-                    <button *ngIf="isEditMode" class="btn btn-primary" (click)="onSubmit()">Edit</button>
+                    <button *ngIf="!isEditMode" class="btn btn-lg btn-success" (click)="onSubmit()">Generate</button>
+                    <button *ngIf="isEditMode" class="btn btn-success" (click)="onSubmit()">Edit</button>
                 </div>
+                </div>
+                
             </mat-step>
 
         </mat-horizontal-stepper>

@@ -13,6 +13,8 @@ import { ApiComponent } from './api/api.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule} from '@angular/router'
+import { CarouselModule } from 'ngx-owl-carousel-o'
 
 @NgModule({
     imports: [
@@ -22,7 +24,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         AppRoutingModule,
         MDBBootstrapModule.forRoot(),
         BrowserAnimationsModule,
-        NgbModule
+        NgbModule,
+        RouterModule,
+        CarouselModule
     ],
     declarations: [
         AppComponent,
