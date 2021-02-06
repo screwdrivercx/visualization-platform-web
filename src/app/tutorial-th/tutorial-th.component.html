@@ -1,0 +1,136 @@
+<div class="col-md-12 mt-5">
+    <div class="container-fluid mb-4">
+        <div class="card my-5">
+            <div class="card-header">
+                <div class="row mx-2">
+                    <h4>วิธีการใช้งาน</h4>
+                    <div class="ml-auto">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary">
+                              <input type="radio" name="options" id="option1" autocomplete="off" (change)="handleChange()"> ENG
+                            </label>
+                            <label class="btn btn-secondary active">
+                              <input type="radio" name="options" id="option2" autocomplete="off"  checked> TH
+                            </label>
+                          </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                <div class="offset-md-2 col-md-8">
+                    <h5>ภาพรวม</h5>
+                    <ul>
+                        <li><a class="text-primary" (click)="scroll(first)"><u>วิธีการใช้งานทีละขั้นตอน</u></a>
+                            <ul>
+                                <li><a class="text-primary" (click)="scroll(first_1)">1. เลือกเทมเพลตของ visualization ของคุณ</a></li>
+                                <li><a class="text-primary" (click)="scroll(first_2)">2. ป้อนข้อมูลและไฟล์กำหนดค่า</a></li>
+                                <li><a class="text-primary" (click)="scroll(first_3)">3. สรุป</a></li>
+                                <li><a class="text-primary" (click)="scroll(first_4)">ผลลัพธ์</a></li>
+                            </ul>
+                        </li>
+                        <li *ngIf="templates">
+                            <a class="text-primary" (click)="scroll(second)"><u>ตัวอย่างไฟล์ข้อมูลและไฟล์กำหนดค่า</u></a>
+                            <ul *ngIf="templates">
+                                <li *ngFor="let template of templates"><a class="text-primary"
+                                        (click)="scroll(second)">{{template.TemplateName}}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p class="my-5"><strong>*หมายเหตุ*</strong> คุณจำเป็นต้อง <a routerLink="/account/register"><u>ลงทะเบียน</u></a>  และ <a routerLink="/account/login"><u>เข้าสู่ระบบ</u></a> visualization platform เพื่อเริ่มต้นการสร้าง visualization</p>
+                    <hr>
+
+                    <div #first>
+                        <h4 class="mt-5">วิธีการใช้งานทีละขั้นตอน</h4><br>
+                        <p>นี่คือคำแนะนำทีละขั้นตอนเกี่ยวกับวิธีสร้าง visualization บน visualization platform</p>
+
+                        <div class="my-5" #first_1>
+                            <p class="mt-5"><strong>1. เลือกเทมเพลตของ visualization ของคุณ</strong><br><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;คุณสามารถเลือกเทมเพลตของ visualization ได้ที่นี่ คลิก "Select" เพื่อไปยังขั้นตอนถัดไป</p>
+                            <figure class="mb-5">
+                                <img src="../../assets/image/step1.png" alt="step 1"
+                                    style="width: 100%;height: 30vw;object-fit: contain;">
+                                <figcaption class="text-center mt-3">ขั้นตอนที่ 1 : เลือกเทมเพลตของ visualization ของคุณ
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <hr>
+
+                        <div class="my-5" #first_2>
+                            <p class="mt-5"><strong>2. ป้อนข้อมูลและไฟล์กำหนดค่า</strong><br><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;ในขั้นตอนนี้เราจะขอให้คุณป้อนไฟล์ข้อมูลและไฟล์กำหนดค่า
+                                <br><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<strong>ไฟล์ข้อมูล </strong>คือไฟล์ CSV หรือ JSON ซึ่งมีข้อมูลของคุณที่จะแสดงใน visualization <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<strong>ไฟล์กำหนดค่า </strong>คือไฟล์ CSV หรือ JSON ซึ่งมีการกำหนดค่าเช่น ความสูง, ความกว้าง, สี ฯลฯ <br><br>
+                                </p>
+                                <p *ngIf="templates">
+                                คุณสามารถดาวน์โหลดตัวอย่างข้อมูลและไฟล์กำหนดค่าของแต่ละเทมเพลตได้ <a href=""><u>ที่นี่</u></a></p>
+                            <figure class="mb-5">
+                                <img src="../../assets/image/step2.png" alt="step 2"
+                                    style="width: 100%;height: 30vw;object-fit: contain;">
+                                <figcaption class="text-center mt-3">ขั้นตอนที่ 2 : ป้อนข้อมูลและไฟล์กำหนดค่า
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <hr>
+
+                        <div class="my-5" #first_3>
+                            <p><strong>3. สรุป</strong><br><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;คุณพร้อมแล้ว! ในขั้นตอนนี้คุณสามารถตรวจสอบการตั้งค่าของคุณสำหรับ visualization <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;คุณสามารถกดปุ่ม "Generate" เพื่อเริ่มสร้าง visualization
+                    </p>
+                            <figure>
+                                <img src="../../assets/image/step3.png" alt="step 3"
+                                    style="width: 100%;height: 30vw;object-fit: contain;">
+                                <figcaption class="text-center mt-3">ขั้นตอนที่ 3 : สรุป</figcaption>
+                            </figure>
+                        </div>
+                        <hr>
+
+                        <div class="my-5" #first_4>
+                            <p><strong>ผลลัพธ์</strong><br><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;คุณสร้าง visualization ของคุณสำเร็จแล้ว! นี่คือผลลัพธ์ คุณสามารถดู visualization ของคุณและใช้ฟังก์ชัน interactive ได้ทันที <br><br>
+                                คลิก "View Full Size" เพื่อดูขนาดดั้งเดิมของ visualization <br> <br>
+                                คุณยังสามารถใช้ลิงก์ด้านล่างเพื่อใช้ visualization ในการนำเสนอของคุณบน Microsoft PowerPoint
+                            </p>
+                            <figure>
+                                <img src="../../assets/image/result.png" alt="step 3"
+                                    style="width: 100%;height: 30vw;object-fit: contain;">
+                                <figcaption class="text-center mt-3">Result</figcaption>
+                            </figure>
+                        </div>
+                        <hr>
+                    </div>
+
+                    <div #second>
+                        <div class="my-5" *ngIf="templates">
+                            <h4>ตัวอย่างไฟล์ข้อมูลและไฟล์กำหนดค่า</h4>
+                            <table class="table table-striped my-3">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 50%">เทมเพลต</th>
+                                        <th style="width: 50%">ตัวอย่างไฟล์</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let template of templates">
+                                        <td>{{template.TemplateName}}</td>
+                                        <td>
+                                            <a
+                                                href="{{apiUrl}}/example-files/{{template.TemplateName}}-data.csv">{{template.TemplateName}}-data.csv</a><br>
+                                            <a
+                                                href="{{apiUrl}}/example-files/{{template.TemplateName}}-config.csv">{{template.TemplateName}}-config.csv</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,23 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
-
 @Component({
-  selector: 'app-api',
-  templateUrl: './api.component.html',
-  styleUrls: ['./api.component.css']
+  selector: 'app-api-th',
+  templateUrl: './api-th.component.html',
+  styleUrls: ['./api-th.component.css']
 })
-export class ApiComponent implements OnInit {
+export class ApiThComponent implements OnInit {
 
   constructor(private router : Router) { }
 
   handleChange(){
-    this.router.navigate(['/api/th']);
+    this.router.navigate(['/api']);
   }
 
   scroll(el: HTMLElement): void {
     el.scrollIntoView({behavior: 'smooth'});
   }
-
 
   ngOnInit(): void {
   }

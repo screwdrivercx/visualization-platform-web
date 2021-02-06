@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { TemplateService,AccountService } from '../_services'
+import { TemplateService,AccountService } from '../_services';
 
 @Component({
-  selector: 'app-tutorial',
-  templateUrl: './tutorial.component.html',
-  styleUrls: ['./tutorial.component.css']
+  selector: 'app-tutorial-th',
+  templateUrl: './tutorial-th.component.html',
+  styleUrls: ['./tutorial-th.component.css']
 })
-export class TutorialComponent implements OnInit {
+export class TutorialThComponent implements OnInit {
   templates: Object;
   apiUrl = environment.apiUrl;
 
@@ -18,7 +18,7 @@ export class TutorialComponent implements OnInit {
     private templateService : TemplateService) { }
 
   handleChange(){
-    this.router.navigate(['/tutorial/th']);
+    this.router.navigate(['/tutorial']);
   }
 
   scroll(el: HTMLElement): void {
@@ -32,5 +32,4 @@ export class TutorialComponent implements OnInit {
       .pipe(first())
       .subscribe(templates => this.templates = templates);
   }
-
 }

@@ -14,7 +14,11 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule} from '@angular/router'
-import { CarouselModule } from 'ngx-owl-carousel-o'
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { TutorialThComponent } from './tutorial-th/tutorial-th.component'
+import { CommonModule } from '@angular/common';
+import { TutorialComponent } from './tutorial/tutorial.component';
+import { ApiThComponent } from './api-th/api-th.component';
 
 @NgModule({
     imports: [
@@ -34,6 +38,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o'
         HomeComponent,
         MainComponent,
         ApiComponent,
+        TutorialComponent,
+        TutorialThComponent,
+        ApiThComponent,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

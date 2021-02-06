@@ -6,12 +6,11 @@
                     <h4>API documentation</h4>
                     <div class="ml-auto">
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary active">
-                                <input type="radio" name="options" id="option1" autocomplete="off" checked> ENG
-                            </label>
                             <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option2" autocomplete="off"
-                                    (change)="handleChange()"> TH
+                                <input type="radio" name="options" id="option1" autocomplete="off" (change)="handleChange()"> ENG
+                            </label>
+                            <label class="btn btn-secondary active">
+                                <input type="radio" name="options" id="option2" autocomplete="off" checked> TH
                             </label>
                         </div>
                     </div>
@@ -21,50 +20,48 @@
 
             <div class="card-body">
                 <div class="offset-md-2 col-md-8">
-                    <h5>About</h5><br>
-                    <p>We provide an API for you to use your visualization on your website or Microsoft PowerPoint
-                        presentation.</p>
+                    <h5>เกี่ยวกับ</h5><br>
+                    <p>เรามี API เพื่อให้คุณสามารถใช้ visualization ของคุณบนเว็บไซต์หรือการนำเสนอ Microsoft PowerPoint</p>
                     <hr><br>
-                    <h4>How to use our API ?</h4>
+                    <h4>จะใช้ API ของเราได้อย่างไร?</h4>
                     <br>
-                    <p>On the result page, after you have generated a visualization. You will see a link below your
-                        visualization.</p>
+                    <p>ในหน้าผลลัพธ์หลังจากที่คุณสร้าง visualization แล้ว คุณจะเห็นลิงค์ด้านล่างไฟล์ visualization ของคุณ</p>
                     <figure class="mb-5">
                         <img src="../../assets/image/link.png" alt="api link"
                             style="width: 100%;object-fit: contain;border: solid black 1px;">
-                        <figcaption class="text-center mt-3">API link</figcaption>
+                        <figcaption class="text-center mt-3">API Url</figcaption>
                     </figure>
-                    <p>This is your visualization API Url. You can click "copy" to copy the link to your clipboard.
-                        After that, you can use it in :</p>
+                    <p>นี่คือ API Url visualization ของคุณ คุณสามารถคลิก "copy" เพื่อคัดลอกลิงก์ไปยังคลิปบอร์ดของคุณหลังจากนั้นคุณสามารถใช้งานได้ในรูปแบบ :</p>
                     <ul>
-                        <li><a class="text-primary" (click)="scroll(first)">Website</a></li>
+                        <li><a class="text-primary" (click)="scroll(first)">เว็บไซต์</a></li>
                         <li><a class="text-primary" (click)="scroll(second)">Microsoft PowerPoint</a></li>
                     </ul>
                     <br>
                     <hr>
                     <br>
                     <div #first>
-                        <h4>How to use the API on your website ?</h4>
+                        <h4>จะใช้ API บนเว็บไซต์ของคุณได้อย่างไร?</h4>
                         <br>
-                        <p>You can use the API Url with <strong>&lt;embed&gt;</strong> or
+                        <p>คุณสามารถใช้งาน API Url ได้ใน <strong>&lt;embed&gt;</strong> หรือ
                             <strong>&lt;iframe&gt;</strong>.
                             <br>
                             <br>
-                            for example :
+                            ตัวอย่าง :
                             <br>
                         <figure class="mb-5">
                             <img src="../../assets/image/iframe.png" alt="iframe"
                                 style="width: 100%;object-fit: contain;">
                             <figcaption class="text-center mt-3">&lt;iframe&gt;</figcaption>
                         </figure>
-                        <p>You can put your API Url in "src" :</p>
+                        <p>คุณสามารถใส่ API Url ใน "src":</p>
                         <br>
                         <figure class="mb-5">
                             <img src="../../assets/image/iframe2.png" alt="iframe"
                                 style="width: 100%;object-fit: contain;">
                             <figcaption class="text-center mt-3">&lt;iframe&gt; with API Url</figcaption>
                         </figure>
-                        <p>After that, You might need to add some CSS or Bootstrap to configure your visualization size.
+                        <p>
+                            หลังจากนั้นคุณอาจต้องเพิ่ม CSS หรือ Bootstrap เพื่อกำหนดค่าขนาดการแสดงภาพของคุณ
                         </p>
                         <br>
                         <figure class="mb-5">
@@ -72,7 +69,8 @@
                                 style="width: 100%;object-fit: contain;">
                             <figcaption class="text-center mt-3">&lt;iframe&gt; with API Url and Bootstrap</figcaption>
                         </figure>
-                        <p>Congratulations! You have embedded your visualization on your website.</p>
+                        <p>
+                            ยินดีด้วย! คุณได้ใช้งาน visualization ของคุณบนเว็บไซต์ของคุณเรียบร้อยแล้ว</p>
                         <br>
                         <figure class="mb-5">
                             <img src="../../assets/image/web.png" alt="iframe" style="width: 100%;object-fit: contain;">
@@ -84,17 +82,16 @@
                     <br>
 
                     <div #second>
-                        <h4>How to use the API on your Microsoft PowerPoint presentation ?</h4>
+                        <h4>จะใช้ API บน Microsoft PowerPoint ของคุณได้อย่างไร?</h4>
                         <br>
-                        <p>You will need to get "Web Viewer" add-in. <br>
-                            On toolbar, click "insert" then "Get Add-ins" after that search for "Web Viewer".
+                        <p>คุณจะต้องได้รับส่วนเสริม "Web Viewer" <br>
+                            บนแถบเครื่องมือคลิก "แทรก" จากนั้น "รับ Add-in" หลังจากนั้นค้นหา "Web Viewer"
                         </p>
                         <figure class="mb-5">
                             <img src="../../assets/image/ppt.png" alt="ppt" style="width: 80%;object-fit: contain;">
-                            <figcaption class="text-center mt-3">Web Viewer</figcaption>
+                            <figcaption class="text-center mt-3">Web viewer</figcaption>
                         </figure>
-                        Once you added Web Viewer, you can add Web Viewer add-in on your presentation slide then place
-                        the API Url to show the visualization.
+                        เมื่อคุณเพิ่ม Web Wiewer แล้ว คุณสามารถเพิ่ม Web Viewer บนสไลด์นำเสนอของคุณจากนั้นวาง URL ของ API เพื่อแสดง visualization
                         <br>
                     </div>
 
