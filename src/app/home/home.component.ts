@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
     items = null;
     role;
     count = 0;
+    countActive = 0;
     apiUrl = environment.apiUrl;
     templates = null;
     customOptions: OwlOptions = {
@@ -56,6 +57,9 @@ export class HomeComponent implements OnInit {
                     .subscribe((items: any[]) => {
                         items.forEach(item => {
                             if (item.status == "active") {
+                                this.count++;
+                                this.countActive++;
+                            }else{
                                 this.count++;
                             }
                         });
