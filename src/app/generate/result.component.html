@@ -6,15 +6,18 @@
         <div class="embed-responsive embed-responsive-16by9">
             <iframe class="e2e-iframe-trusted-src" [src]="tryDoctype"></iframe>
         </div>
-        <div class="mt-5 text-center">
-            <a [href]="pptUrl"><button class="btn btn-success" >View Full Size</button></a>
+        <div *ngIf="!isExample">
+            <div class="mt-5 text-center">
+                <a [href]="pptUrl"><button class="btn btn-success">View Full Size</button></a>
+            </div>
+            <div class="row mt-3 ml-4">
+                <label for="pptUrl">API URL :</label>
+            </div>
+            <div class="row justify-content-center">
+                <input id="pptUrl" type="text" class="form-control" [value]="pptUrl" style="width: 80%;" readonly>
+                <button class="btn btn-primary ml-3" [cdkCopyToClipboard]="pptUrl">Copy</button>
+            </div>
         </div>
-        <div class="row mt-3 ml-4">
-            <label for="pptUrl">API URL :</label>
-        </div>
-        <div class="row justify-content-center">
-            <input  id="pptUrl" type="text" class="form-control" [value]="pptUrl" style="width: 80%;" readonly>
-            <button class="btn btn-primary ml-3" [cdkCopyToClipboard]="pptUrl">Copy</button>
-        </div>
+
     </div>
 </div>
