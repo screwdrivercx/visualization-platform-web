@@ -20,7 +20,7 @@
                                 <a *ngIf="item.status=='active'" routerLink="/generate/result/{{item.refId}}"
                                     style="color: inherit;text-decoration: none;">
                                     <div class="card m-3" style="width: 18rem;">
-                                        <img class="card-img-top" src="{{apiUrl}}/{{item.template}}.png"
+                                        <img class="card-img-top" src="{{apiUrl}}/static/{{item.template}}.png"
                                             alt="Card image cap">
                                         <div class="card-body mt-auto">
                                             <div class="card-text">
@@ -37,7 +37,7 @@
                                 </a>
                                 <div *ngIf="item.status=='inactive'" class="card m-3 d-flex justify-content-start "
                                     style="width: 18rem;background-color: rgba(245, 245, 245, 1);opacity: .5;">
-                                    <img class="card-img-top" src="{{apiUrl}}/{{item.template}}.png"
+                                    <img class="card-img-top" src="{{apiUrl}}/static/{{item.template}}.png"
                                         alt="Card image cap">
                                     <div class="card-body mt-auto">
                                         <div class="card-text">
@@ -63,7 +63,7 @@
                     <owl-carousel-o [options]="customOptions">
                         <ng-container *ngFor="let template of templates">
                             <ng-template carouselSlide>
-                                <img class="card-img-top" src="{{apiUrl}}/{{template.TemplateName}}.png"
+                                <img class="card-img-top" src="{{apiUrl}}/static/{{template.TemplateName}}.png"
                                     alt="card image">
                                 <a routerLink="/generate/result/example-{{template.TemplateName}}">
                                     <div class="text-center">

@@ -38,7 +38,7 @@ export class ResultComponent implements OnInit {
             
             this.isExample = true;
             this.exampleName = this.refId.split("-")[1];
-            this.tryDoctype = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.apiUrl}/${this.refId}.html`);
+            this.tryDoctype = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.apiUrl}/static/${this.refId}.html`);
             console.log(this.tryDoctype);
         }
         else {

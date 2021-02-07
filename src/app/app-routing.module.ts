@@ -21,7 +21,7 @@ const routes: Routes = [
     { path: 'api/th', component: ApiThComponent },
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'generate', loadChildren: generateModule, canActivate: [AuthGuard], data:{role : ['user','designer']} },
-    { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard], data: {role: 'admin'} },
+    { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard], data: {role: ['admin','superadmin']} },
     { path: 'account', loadChildren: accountModule },
 
     // otherwise redirect to home
