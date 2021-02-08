@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit {
         this.vgenService.updateActivate(refId, status)
             .subscribe(res => {
                 this.count = 0;
+                this.countActive = 0;
                 this.vgenService.getAll()
                     .subscribe((items: any[]) => {
                         items.forEach(item => {
@@ -78,6 +79,9 @@ export class HomeComponent implements OnInit {
         if (confirm(confirm_text)) {
             const item = this.items.find(x => x.id === id);
             item.isDeleting = true;
+            if(item["status"] == "active"){
+                this.countActive--;
+            }
             this.vgenService.delete(id)
                 .pipe(first())
                 .subscribe(() => {
@@ -103,6 +107,9 @@ export class HomeComponent implements OnInit {
                 .subscribe((items: any[]) => {
                     items.forEach(item => {
                         if (item.status == "active") {
+                            this.count++;
+                            this.countActive++;
+                        }else{
                             this.count++;
                         }
                     });

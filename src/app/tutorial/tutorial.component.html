@@ -128,9 +128,15 @@
                                 <tbody>
                                     <tr *ngFor="let template of templates">
                                         <td>{{template.TemplateName}}</td>
-                                        <td>
+                                        <td *ngIf="template.TemplateName!='Sunburst'">
                                             <a
-                                                href="{{apiUrl}}/static/example-files/{{template.TemplateName}}-data.csv">{{template.TemplateName}}-data.csv</a><br>
+                                                href="{{apiUrl}}/static/example-files/{{template.TemplateName}}-data.csv">{{template.TemplateName}}-data.csv</a><br>  
+                                            <a
+                                                href="{{apiUrl}}/static/example-files/{{template.TemplateName}}-config.csv">{{template.TemplateName}}-config.csv</a>
+                                        </td>
+                                        <td *ngIf="template.TemplateName == 'Sunburst'">
+                                            <a
+                                            href="{{apiUrl}}/static/example-files/{{template.TemplateName}}-data.json">{{template.TemplateName}}-data.json</a><br>
                                             <a
                                                 href="{{apiUrl}}/static/example-files/{{template.TemplateName}}-config.csv">{{template.TemplateName}}-config.csv</a>
                                         </td>
