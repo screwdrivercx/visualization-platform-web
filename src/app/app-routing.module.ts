@@ -7,6 +7,7 @@ import { MainComponent } from './main/main.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
 import { TutorialThComponent } from './tutorial-th/tutorial-th.component'
 import { AuthGuard } from './_helpers';
+import { LogsComponent } from './logs/logs.component';
 
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'generate', loadChildren: generateModule, canActivate: [AuthGuard], data:{role : ['user','designer']} },
     { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard], data: {role: ['admin','superadmin']} },
+    { path: 'logs' , component: LogsComponent, canActivate : [AuthGuard], data: {role : ['admin','superadmin']}},
     { path: 'account', loadChildren: accountModule },
 
     // otherwise redirect to home

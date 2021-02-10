@@ -1,0 +1,52 @@
+<div class="col-md-8 offset-md-2 mt-5">
+    <div class="container">
+        <div class="card my-5">
+            <div class="card-header">
+                <h4>Logs</h4>
+            </div>
+            <div class="card-body">
+                <div class="row px-3 align-items-center">
+                    <form class="form-inline md-form form-sm active-cyan-2 w-40 ml-auto" [formGroup]="myForm" (submit)="onSubmit()">
+                        <input class="form-control form-control-sm ml-auto w-40" type="text" placeholder="Search by role or uid"
+                            aria-label="Search by role or uid" formControlName="keyword" mdbInput>
+                        <button type="submit" style="border: none; background-color: transparent;"><mdb-icon fas icon="search" aria-hidden="true"></mdb-icon></button>
+                    </form>
+                </div>
+        
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%">date</th>
+                            <th style="width: 15%">Role</th>
+                            <th style="width: 15%">uid</th>
+                            <th style="width: 15%">method</th>
+                            <th style="width: 15%">target</th>
+                            <th style="width: 10%">target id</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let log of logs_table">
+                            <td>{{log.createdAt}}</td>
+                            <td *ngIf="log.template_id">designer</td>
+                            <td *ngIf="log.file_id">user</td>
+                            <td *ngIf="log.user">admin</td>
+                            <td>{{log.uid}}</td>
+                            <td>{{log.method}}</td>
+                            <td *ngIf="log.template_id">template</td>
+                            <td *ngIf="log.file_id">file</td>
+                            <td *ngIf="log.user">user</td>
+                            <td *ngIf="log.template_id">{{log.template_id}}</td>
+                            <td *ngIf="log.file_id">{{log.file_id}}</td>
+                            <td *ngIf="log.user">{{log.user}}</td>
+                        </tr>
+                        <tr *ngIf="!logs">
+                            <td colspan="4" class="text-center">
+                                <span class="spinner-border spinner-border-lg align-center"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

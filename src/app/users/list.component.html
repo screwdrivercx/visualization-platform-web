@@ -1,33 +1,55 @@
-<h1>Users</h1>
-<a routerLink="add" class="btn btn-sm btn-success mb-2">Add User</a>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th style="width: 30%">First Name</th>
-            <th style="width: 30%">Last Name</th>
-            <th style="width: 30%">Username</th>
-            <th style="width: 30%">Role</th>
-            <th style="width: 10%"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let user of users">
-            <td>{{user.firstName}}</td>
-            <td>{{user.lastName}}</td>
-            <td>{{user.username}}</td>
-            <td>{{user.role}}</td>
-            <td style="white-space: nowrap">
-                <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
-                <button (click)="deleteUser(user.id,user.username)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting">
-                    <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
-                    <span *ngIf="!user.isDeleting">Delete</span>
-                </button>
-            </td>
-        </tr>
-        <tr *ngIf="!users">
-            <td colspan="4" class="text-center">
-                <span class="spinner-border spinner-border-lg align-center"></span>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="card my-5">
+    <div class="card-header">
+        <h4>Users</h4>
+    </div>
+    <div class="card-body">
+
+<div class="row px-3">
+    <p class="ml-auto">total users : {{count}}</p>
+</div>
+
+        <div class="row px-3 align-items-center">
+            <button class="btn btn-success h-50" routerLink="add">Add User</button>
+            <form class="form-inline md-form form-sm active-cyan-2 w-40 ml-auto" [formGroup]="myForm" (submit)="onSubmit()">
+                <input class="form-control form-control-sm ml-auto w-40" type="text" placeholder="Search"
+                    aria-label="Search" formControlName="keyword" mdbInput>
+                <button type="submit" style="border: none; background-color: transparent;"><mdb-icon fas icon="search" aria-hidden="true"></mdb-icon></button>
+            </form>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 30%">uid</th>
+                    <th style="width: 20%">First Name</th>
+                    <th style="width: 30%">Last Name</th>
+                    <th style="width: 30%">Username</th>
+                    <th style="width: 20%">Role</th>
+                    <th style="width: 10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users_table">
+                    <td>{{user.id}}</td>
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.role}}</td>
+                    <td style="white-space: nowrap">
+                        <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                        <button (click)="deleteUser(user.id,user.username)"
+                            class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting">
+                            <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
+                            <span *ngIf="!user.isDeleting">Delete</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="!users">
+                    <td colspan="4" class="text-center">
+                        <span class="spinner-border spinner-border-lg align-center"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

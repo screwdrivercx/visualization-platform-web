@@ -16,9 +16,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule} from '@angular/router'
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { TutorialThComponent } from './tutorial-th/tutorial-th.component'
-import { CommonModule } from '@angular/common';
 import { TutorialComponent } from './tutorial/tutorial.component';
 import { ApiThComponent } from './api-th/api-th.component';
+import { LogsComponent } from './logs/logs.component';
 
 @NgModule({
     imports: [
@@ -41,6 +41,7 @@ import { ApiThComponent } from './api-th/api-th.component';
         TutorialComponent,
         TutorialThComponent,
         ApiThComponent,
+        LogsComponent,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

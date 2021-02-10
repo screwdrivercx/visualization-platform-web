@@ -9,8 +9,8 @@ html{
 body {
   margin: 0;
   background-image: url(./assets/image/bg4.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-repeat: repeat-y;
+  background-size: contain;
   margin-bottom: 200px;
   -webkit-font-smoothing: antialiased;
   font-size: .9375rem;

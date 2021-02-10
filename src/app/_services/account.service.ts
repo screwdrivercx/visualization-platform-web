@@ -83,4 +83,16 @@ export class AccountService {
                 return x;
             }));
     }
+
+    getAllLog(){
+        return this.http.get(`${environment.apiUrl}/api/authentication/log/all`);
+    }
+
+    getLogByRole(role : string){
+        return this.http.get(`${environment.apiUrl}/api/authentication/log/role/${role}`);
+    }
+
+    getLogById(id : Number){
+        return this.http.get(`${environment.apiUrl}/api/authentication/log/${id}`);
+    }
 }
