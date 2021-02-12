@@ -31,8 +31,8 @@ export class ListComponent implements OnInit {
         let res = [];
         if(keyword != ''){
             this.users.forEach(user => {
-                if(user["username"] === keyword || user["firstName"] === keyword 
-                || user["lastName"] === keyword || user["role"] === keyword){
+                if(user["id"] == keyword || user["username"] == keyword || user["firstName"] == keyword 
+                || user["lastName"] == keyword || user["role"] == keyword){
                     res.push(user)
                 }
             });

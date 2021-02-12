@@ -88,9 +88,8 @@ export class AddEditComponent implements OnInit {
             .pipe(first())
             .subscribe({
                 next: () => {
-                    this.alertService.success('User Update Successfully', { keepAfterRouteChange: true });
+                    this.alertService.success('User Updated Successfully', { keepAfterRouteChange: true });
                     this.router.navigate(['../../'], { relativeTo: this.route });
-                    console.log(this.form.value.username, this.accountService.userValue.username, this.form.value.role);
                     if ((this.form.value.username == this.accountService.userValue.username) &&
                         this.form.value.role != "admin") {
                         this.accountService.logout();

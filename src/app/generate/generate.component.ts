@@ -56,12 +56,14 @@ export class GenerateComponent implements OnInit {
           dataFileSource: file
         });
         this.dataInputText = this.secondFormGroup.get("dataFileSource").value.name;
+        this.isDataValid = true;
       } else{
         this.isConfigFileChange = true;
         this.secondFormGroup.patchValue({
           configFileSource: file
         });
         this.configInputText = this.secondFormGroup.get("configFileSource").value.name;
+        this.isConfigValid = true;
       }
     }
     else{
@@ -79,16 +81,15 @@ export class GenerateComponent implements OnInit {
     }
 
     if(this.dataInputText.split(".").pop() != "csv" && this.dataInputText.split(".").pop() != "json"){
-      this.isDataValid=false;
-      return;
+      this.isDataValid = false;
     }
 
     if(this.configInputText.split(".").pop() != "csv" && this.configInputText.split(".").pop() != "json"){
       this.isConfigValid = false;
-      return;
     }
 
-    this.isDataValid = this.isConfigValid = true;
+    if(!this.isDataValid || !this.isConfigValid) return;
+
     stepper.next();
   }
 
@@ -123,7 +124,6 @@ export class GenerateComponent implements OnInit {
           configFileSource: ['']
         });
       this.vgenService.getPreconfig(this.refId).subscribe(preconfig  => {
-        console.log(preconfig);
         this.preconfig = preconfig;
         this.dataInputText = this.preconfig["dataFileName"];
         this.configInputText = this.preconfig["configFileName"];

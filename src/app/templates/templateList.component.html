@@ -1,0 +1,36 @@
+<div class="card my-5">
+    <div class="card-header">
+        <div class="row mx-2">
+            <h4>Templates</h4>
+            <div class="ml-auto">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <button class="btn btn-success" routerLink="add">Add Template</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div *ngIf="templates">
+            <div class="row d-flex justify-content-start ml-5">
+                <div *ngFor="let template of templates">
+                    <div class="card m-5" style="width: 20rem;">
+                        <img class="card-img-top" src="{{apiUrl}}/static/{{template.TemplateName}}.png"
+                            alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{template.TemplateName}}</h5>
+                            <p class="card-text">Interactive {{template.TemplateName}}</p>
+                            <div class="row pl-3 pr-3">
+                                <button class="btn btn-sm btn-primary" routerLink="edit/{{template.id}}">Edit</button>
+                                <button (click)="deleteTemplate(template.id,template.TemplateName)"
+                                    class="btn btn-sm btn-danger btn-delete-user ml-3" [disabled]="template.isDeleting">
+                                    <span *ngIf="template.isDeleting" class="spinner-border spinner-border-sm"></span>
+                                    <span *ngIf="!template.isDeleting">Delete</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

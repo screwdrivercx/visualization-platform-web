@@ -30,6 +30,7 @@
       <a class="nav-item nav-link" routerLink="/api" routerLinkActive="active">API</a>
       <a class="nav-item nav-link" target="_blank" rel="noopener noreferrer"  href="https://github.com/nonyo555/Visualization-Platform">Source</a>   
       <a class="nav-item nav-link" routerLink="/generate" routerLinkActive="active">Generate</a>
+      <a *ngIf="user.role == 'designer'" class="nav-item nav-link" routerLink="/templates" routerLinkActive="active">Templates</a>
   </div>
   <ul class="navbar-nav ml-auto">
     <a class="nav-item nav-link" (click)="logout()">Log out</a>

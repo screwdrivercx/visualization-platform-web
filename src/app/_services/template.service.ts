@@ -15,4 +15,20 @@ export class TemplateService {
     getAll(){
         return this.http.get(`${environment.apiUrl}/api/manageTemplate/getAll`);
     }
+
+    getById(id){
+        return this.http.get(`${environment.apiUrl}/api/manageTemplate/${id}`);
+    }
+
+    create(formData){
+        return this.http.post(`${environment.apiUrl}/api/manageTemplate`, formData);
+    }
+
+    update(formData){
+        return this.http.put(`${environment.apiUrl}/api/manageTemplate`, formData);
+    }
+
+    delete(id){
+        return this.http.delete(`${environment.apiUrl}/api/manageTemplate/${id}`)
+    }
 }

@@ -13,6 +13,7 @@ import { LogsComponent } from './logs/logs.component';
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const usersModule = () => import('./users/user.module').then(x => x.UsersModule);
 const generateModule = () => import('./generate/generate.module').then(x => x.GenerateModule);
+const templatesModule = () => import('./templates/template.module').then(x => x.TemplatesModule)
 
 const routes: Routes = [
     { path: '', component: MainComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'api/th', component: ApiThComponent },
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'generate', loadChildren: generateModule, canActivate: [AuthGuard], data:{role : ['user','designer']} },
+    { path: 'templates', loadChildren: templatesModule, canActivate: [AuthGuard], data:{role : 'designer'} },
     { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard], data: {role: ['admin','superadmin']} },
     { path: 'logs' , component: LogsComponent, canActivate : [AuthGuard], data: {role : ['admin','superadmin']}},
     { path: 'account', loadChildren: accountModule },
