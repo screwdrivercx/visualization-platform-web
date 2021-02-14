@@ -13,38 +13,45 @@
                     </form>
                 </div>
         
-                <table class="table table-striped">
+                <table mdbTable class="table" #tableEl="mdbTable">
                     <thead>
                         <tr>
-                            <th style="width: 30%">date</th>
-                            <th style="width: 15%">Role</th>
-                            <th style="width: 15%">uid</th>
-                            <th style="width: 15%">method</th>
-                            <th style="width: 15%">target</th>
-                            <th style="width: 10%">target id</th>
+                            <th scope="col" style="width: 30%">date</th>
+                            <th scope="col" style="width: 15%">Role</th>
+                            <th scope="col" style="width: 15%">uid</th>
+                            <th scope="col" style="width: 15%">method</th>
+                            <th scope="col" style="width: 15%">target</th>
+                            <th scope="col" style="width: 10%">target id</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let log of logs_table">
-                            <td>{{log.createdAt}}</td>
-                            <td *ngIf="log.template_id">designer</td>
-                            <td *ngIf="log.file_id">user</td>
-                            <td *ngIf="log.user">admin</td>
-                            <td>{{log.uid}}</td>
-                            <td>{{log.method}}</td>
-                            <td *ngIf="log.template_id">template</td>
-                            <td *ngIf="log.file_id">file</td>
-                            <td *ngIf="log.user">user</td>
-                            <td *ngIf="log.template_id">{{log.template_id}}</td>
-                            <td *ngIf="log.file_id">{{log.file_id}}</td>
-                            <td *ngIf="log.user">{{log.user}}</td>
+                        <tr *ngFor="let log of logs; let i = index">
+                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{log.createdAt}}</td>
+                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.template_id">designer</td>
+                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.file_id">user</td>
+                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.user">admin</td>
+                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{log.uid}}</td>
+                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{log.method}}</td>
+                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.template_id">template</td>
+                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.file_id">file</td>
+                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.user">user</td>
+                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.template_id">{{log.template_id}}</td>
+                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.file_id">{{log.file_id}}</td>
+                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.user">{{log.user}}</td>
                         </tr>
                         <tr *ngIf="!logs">
-                            <td colspan="4" class="text-center">
+                            <td colspan="6" class="text-center">
                                 <span class="spinner-border spinner-border-lg align-center"></span>
                             </td>
                         </tr>
                     </tbody>
+                    <tfoot class="grey lighten-5 w-100">
+                        <tr>
+                          <td colspan="6">
+                            <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="logs"></mdb-table-pagination>
+                          </td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>

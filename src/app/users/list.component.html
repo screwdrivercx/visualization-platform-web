@@ -17,7 +17,7 @@
             </form>
         </div>
 
-        <table class="table table-striped">
+        <table mdbTable class="table table-striped" #tableEl="mdbTable">
             <thead>
                 <tr>
                     <th style="width: 30%">uid</th>
@@ -29,13 +29,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of users_table">
-                    <td>{{user.id}}</td>
-                    <td>{{user.firstName}}</td>
-                    <td>{{user.lastName}}</td>
-                    <td>{{user.username}}</td>
-                    <td>{{user.role}}</td>
-                    <td style="white-space: nowrap">
+                <tr *ngFor="let user of users_table; let i = index">
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{user.id}}</td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{user.firstName}}</td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{user.lastName}}</td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{user.username}}</td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{user.role}}</td>
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" style="white-space: nowrap">
                         <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
                         <button (click)="deleteUser(user.id,user.username)"
                             class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting">
@@ -50,6 +50,13 @@
                     </td>
                 </tr>
             </tbody>
+            <tfoot class="grey lighten-5 w-100">
+                <tr>
+                  <td colspan="5">
+                    <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="users_table"></mdb-table-pagination>
+                  </td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>

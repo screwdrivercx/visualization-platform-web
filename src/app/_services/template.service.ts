@@ -16,8 +16,12 @@ export class TemplateService {
         return this.http.get(`${environment.apiUrl}/api/manageTemplate/getAll`);
     }
 
+    getOwn(){
+        return this.http.get(`${environment.apiUrl}/api/manageTemplate/owner/me`);
+    }
+
     getById(id){
-        return this.http.get(`${environment.apiUrl}/api/manageTemplate/${id}`);
+        return this.http.get(`${environment.apiUrl}/api/manageTemplate/id/${id}`);
     }
 
     create(formData){

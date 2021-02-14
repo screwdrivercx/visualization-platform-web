@@ -37,7 +37,7 @@ export class TemplateListComponent implements OnInit {
     this.refId = this.route.snapshot.params['refId'];
     this.isEditMode = this.refId ? true : false;
     
-    this.templateService.getAll()
+    this.templateService.getOwn()
       .pipe(first())
       .subscribe(templates => {
         this.templates = templates;
