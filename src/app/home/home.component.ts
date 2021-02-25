@@ -105,6 +105,7 @@ export class HomeComponent implements OnInit {
             this.vgenService.getAll()
                 .pipe(first())
                 .subscribe((items: any[]) => {
+                    console.log(items);
                     items.forEach(item => {
                         if (item.status == "active") {
                             this.count++;

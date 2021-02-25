@@ -1,5 +1,8 @@
 <!-- nav -->
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="!user">
+  <a class="navbar-brand" routerLink="/home" routerLinkActive="active">
+    <img src="../assets/image/logo_transparent.png" class="img-fluid" width="32" height="32" class="d-inline-block align-top">    
+  </a>
   <div class="navbar-nav">
     <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
     <a class="nav-item nav-link" routerLink="/tutorial" routerLinkActive="active">Tutorial</a>
@@ -13,6 +16,9 @@
 </nav>
 
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user&&user.role=='admin' || user&&user.role=='superadmin'">
+  <a class="navbar-brand" routerLink="/home" routerLinkActive="active">
+    <img src="../assets/image/logo_transparent.png" class="img-fluid" width="32" height="32" class="d-inline-block align-top">    
+  </a>
   <div class="navbar-nav">
       <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
       <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Users</a>
@@ -24,6 +30,9 @@
 </nav>
 
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user&&(user.role=='user'||user.role=='designer')">
+  <a class="navbar-brand" routerLink="/home" routerLinkActive="active">
+    <img src="../assets/image/logo_transparent.png" class="img-fluid" width="32" height="32" class="d-inline-block align-top">    
+  </a>
   <div class="navbar-nav">
       <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
       <a class="nav-item nav-link" routerLink="/tutorial" routerLinkActive="active">Tutorial</a>

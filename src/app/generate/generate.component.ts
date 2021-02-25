@@ -26,6 +26,7 @@ export class GenerateComponent implements OnInit {
   preconfig : Object;
   status: string;
   apiUrl = environment.apiUrl;
+  img: string;
 
   constructor(
     private route : ActivatedRoute,
@@ -38,11 +39,12 @@ export class GenerateComponent implements OnInit {
 
   get f() { return this.secondFormGroup.controls; }
  
-  setValue(value,stepper : MatStepper){
+  setValue(value,img,stepper : MatStepper){
     this.firstFormGroup.patchValue({
       vname : value
     })
     this.vname = value;
+    this.img = img;
     stepper.next();
   }
 

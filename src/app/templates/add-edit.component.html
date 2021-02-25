@@ -5,64 +5,103 @@
     </div>
     <div class="card-body">
         <div class="col-md-8 offset-md-2">
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="form-group mt-5 mb-5">
-                <label for="templateName">Template Name</label>
-                    <input type="text" formControlName="templateName" class="form-control"
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="form-group mt-5 mb-5">
+                    <h6>Template name :</h6>
+                    <input type="text" [readonly]="isEditMode" formControlName="templateName" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && f.templateName.errors}" />
                     <div *ngIf="submitted && f.templateName.errors" class="invalid-feedback">
                         <div *ngIf="f.templateName.errors.required">Template Name is required</div>
                     </div>
-            </div>
-            <div class="form-group mt-5 mb-5">
-                <h6>Please Input Class File :</h6>
-                <div class="custom-file">              
-                    <input type="file" class="custom-file-input" formControlName="class"
-                        (change)="onFileChange('class',$event)"
-                        [ngClass]="{ 'is-invalid': (submitted && f.class.errors) || (submitted && !isClassValid)}"
-                        accept=".js">
-                    <label  *ngIf="!isClassFileChange" class="custom-file-label text-secondary"
-                        for="customFile">{{classInputText}}      <mat-icon>library_add</mat-icon></label>
-                    <label *ngIf="isClassFileChange" class="custom-file-label"
-                        for="customFile">{{classInputText}}</label>
-                    <div *ngIf="submitted && f.class.errors" class="invalid-feedback">
-                        <div *ngIf="f.class.errors.required">Class File is required</div>
-                    </div>
-                    <div *ngIf="submitted && !isClassValid" class="invalid-feedback">
-                        <div *ngIf="!isClassValid">Please input only .js file.</div>
+                </div>
+
+                <div class="form-group mt-5 mb-5">
+                    <h6>Description :</h6>
+                    <textarea cols="30" rows="10" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors}"></textarea>
+                    <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                        <div *ngIf="f.description.errors.required">Template description is required</div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group mt-5 mb-5">
-                <h6>Please Input Embedded File :</h6>
-                <div class="custom-file"> 
-                    <input type="file" class="custom-file-input" id="customFile" formControlName="embedded"
-                        (change)="onFileChange('embedded',$event)"
-                        [ngClass]="{ 'is-invalid': (submitted && f.embedded.errors) || (submitted && !isEmbeddedValid)}"
-                        accept=".js">    
-                        <label  *ngIf="!isEmbeddedFileChange" class="custom-file-label text-secondary"
-                        for="customFile">{{embeddedInputText}}      <mat-icon>library_add</mat-icon></label>
-                    <label *ngIf="isEmbeddedFileChange" class="custom-file-label"
-                        for="customFile">{{embeddedInputText}}</label>  
-                    <div *ngIf="submitted && f.embedded.errors" class="invalid-feedback">
-                        <div *ngIf="f.embedded.errors.required">Embedded File is required</div>
+
+                <div class="form-group mt-5 mb-5">
+                    <h6>Template Image :</h6>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" formControlName="img"
+                            (change)="onFileChange('img',$event)"
+                            [ngClass]="{ 'is-invalid': (submitted && f.img.errors) || !isImgValid}"
+                            accept="image/png, image/jpeg">
+                        <label *ngIf="!isEditMode && !isImgFileChange" class="custom-file-label text-secondary"
+                            for="customFile">{{imgInputText}}      <mat-icon>library_add</mat-icon></label>
+                        <label *ngIf="isImgFileChange" class="custom-file-label"
+                            for="customFile">{{imgInputText}}</label>
+                        <label *ngIf="isEditMode && !isImgFileChange" class="custom-file-label text-secondary"
+                            for="customFile">current : {{imgInputText}}</label>
+                        <div *ngIf="submitted && f.img.errors" class="invalid-feedback">
+                            <div *ngIf="f.img.errors.required">Template image is required</div>
+                        </div>
+                        <div *ngIf="!isImgValid" class="invalid-feedback">
+                            <div *ngIf="!isImgValid">Please input only image/png, image/jpeg file.</div>
+                        </div>
                     </div>
-                    <div *ngIf="submitted && !isEmbeddedValid" class="invalid-feedback">
-                        <div *ngIf="!isEmbeddedValid">Please input only .js file.</div>
+                    <div class="mt-3" *ngIf="imgUrl"><img class="card-img-top" [src]="imgUrl"></div>
+                </div>
+
+                <div class="form-group mt-5 mb-5">
+                    <h6>Please Input Class File :</h6>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" formControlName="class"
+                            (change)="onFileChange('class',$event)"
+                            [ngClass]="{ 'is-invalid': (submitted && f.class.errors) || (submitted && !isClassValid)}"
+                            accept=".js">
+                        <label *ngIf="!isEditMode && !isClassFileChange" class="custom-file-label text-secondary"
+                            for="customFile">{{classInputText}}      <mat-icon>library_add</mat-icon></label>
+                        <label *ngIf="isClassFileChange" class="custom-file-label"
+                            for="customFile">{{classInputText}}</label>
+                        <label *ngIf="isEditMode && !isClassFileChange" class="custom-file-label text-secondary"
+                            for="customFile">current : {{classInputText}}</label>
+                        <div *ngIf="submitted && f.class.errors" class="invalid-feedback">
+                            <div *ngIf="f.class.errors.required">Class File is required</div>
+                        </div>
+                        <div *ngIf="submitted && !isClassValid" class="invalid-feedback">
+                            <div *ngIf="!isClassValid">Please input only .js file.</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <button *ngIf="isEditMode" [disabled]="loading" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    Edit
-                </button>
-                <button *ngIf="!isEditMode" [disabled]="loading" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    Add
-                </button>
-            </div>
-        </form>
+
+                <div class="form-group mt-5 mb-5">
+                    <h6>Please Input Embedded File :</h6>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile" formControlName="embedded"
+                            (change)="onFileChange('embedded',$event)"
+                            [ngClass]="{ 'is-invalid': (submitted && f.embedded.errors) || (submitted && !isEmbeddedValid)}"
+                            accept=".js">
+                        <label *ngIf="!isEditMode && !isEmbeddedFileChange" class="custom-file-label text-secondary"
+                            for="customFile">{{embeddedInputText}}      <mat-icon>library_add</mat-icon></label>
+                        <label *ngIf="isEmbeddedFileChange" class="custom-file-label"
+                            for="customFile">{{embeddedInputText}}</label>
+                        <label *ngIf="isEditMode && !isEmbeddedFileChange" class="custom-file-label text-secondary"
+                            for="customFile">current : {{embeddedInputText}}</label>
+                        <div *ngIf="submitted && f.embedded.errors" class="invalid-feedback">
+                            <div *ngIf="f.embedded.errors.required">Embedded File is required</div>
+                        </div>
+                        <div *ngIf="submitted && !isEmbeddedValid" class="invalid-feedback">
+                            <div *ngIf="!isEmbeddedValid">Please input only .js file.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button *ngIf="isEditMode" [disabled]="loading" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Edit
+                    </button>
+                    <button *ngIf="!isEditMode" [disabled]="loading" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Add
+                    </button>
+                </div>
+
+            </form>
+        </div>
     </div>
-</div>
 </div>

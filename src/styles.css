@@ -66,3 +66,17 @@ h1{
   height: 20vw;
   object-fit: contain;
 }
+
+.logo-image{
+  width: 46px;
+  height: 46px;
+  overflow: hidden;
+  margin-top: -6px;
+}
+
+iframe {
+  height: 300px;
+  width: 300px;
+  resize: both;
+  overflow: auto;
+}
