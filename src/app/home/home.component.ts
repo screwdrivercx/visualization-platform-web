@@ -65,8 +65,6 @@ export class HomeComponent implements OnInit {
                             }
                         });
                         this.items = items;
-                        console.log(items);
-                        console.log(this.items);
                     });
             });
 
@@ -87,7 +85,6 @@ export class HomeComponent implements OnInit {
                 .subscribe(() => {
                     this.items = this.items.filter(x => x.id !== id)
                     this.count -= 1;
-                    console.log("deleted");
                 });
             this.alertService.success('Visualization Deleted Successfully', { keepAfterRouteChange: true, autoClose: true });
         }
@@ -105,7 +102,6 @@ export class HomeComponent implements OnInit {
             this.vgenService.getAll()
                 .pipe(first())
                 .subscribe((items: any[]) => {
-                    console.log(items);
                     items.forEach(item => {
                         if (item.status == "active") {
                             this.count++;

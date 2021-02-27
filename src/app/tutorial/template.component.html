@@ -1,0 +1,46 @@
+<div *ngIf="template" class="card my-5">
+    <div class="card-header">
+        <h4>{{template.TemplateName}}</h4>
+    </div>
+
+    <div class="card-body">
+        <div class="offset-md-3 col-md-6 my-5">
+            <div class="mb-5 mt-5">
+                <p><strong>Description : </strong> {{template.description}}</p>
+            </div>
+            <img class="card-img-top mt-5 mb-5" src="{{apiUrl}}/static/{{template.img}}">
+            <table class="table table-hover my-5">
+                <thead>
+                    <tr>
+                        <th style="width: 50%"></th>
+                        <th style="width: 50%">Download</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Example data</strong></td>
+                        <td>
+                            <a
+                                href="{{apiUrl}}/static/example-files/{{template.data_name}}">{{template.data_name}}</a><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Example config</strong></td>
+                        <td>
+                            <a
+                                href="{{apiUrl}}/static/example-files/{{template.config_name}}">{{template.config_name}}</a><br>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="offset-md-2 col-md-10">
+            <div class="my-5">
+                <h5>Live Example</h5>
+            </div>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="e2e-iframe-trusted-src" [src]="tryDoctype"></iframe>
+            </div>
+        </div>
+    </div>
+</div>

@@ -51,7 +51,6 @@ export class GenerateComponent implements OnInit {
   onFileChange(type: string,event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      console.log(file);
       if(type == "data"){
         this.isDataFileChange = true;
         this.secondFormGroup.patchValue({
@@ -76,8 +75,6 @@ export class GenerateComponent implements OnInit {
   submitSecond(stepper : MatStepper){
     this.submitted = true;
     // stop here if form is invalid
-
-    console.log(this.f.data.errors);
     if (this.firstFormGroup.invalid || this.secondFormGroup.invalid) {
       return;
     }
@@ -146,8 +143,6 @@ export class GenerateComponent implements OnInit {
       this.vgenService.generate(this.firstFormGroup.get("vname").value, formData)
       .subscribe({
         next: (res) => {
-          console.log(res);
-          console.log(res["refId"]);
           if(res["refId"]){
             this.alertService.success('Generate Visualization successful', { keepAfterRouteChange: true });
             this.router.navigate(['/generate/result/',res["refId"]], { relativeTo: this.route });
@@ -180,8 +175,6 @@ export class GenerateComponent implements OnInit {
       this.vgenService.update(this.refId, formData)
       .subscribe({
         next : (res) => {
-          console.log(res);
-          console.log(res["refId"]);
           if(res["refId"]){
             this.alertService.success('Edit Visualization successful', { keepAfterRouteChange: true });
             this.router.navigate(['/generate/result/',res["refId"]], { relativeTo: this.route });

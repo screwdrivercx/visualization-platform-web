@@ -16,7 +16,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule} from '@angular/router'
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { TutorialThComponent } from './tutorial-th/tutorial-th.component'
-import { TutorialComponent } from './tutorial/tutorial.component';
 import { ApiThComponent } from './api-th/api-th.component';
 import { LogsComponent } from './logs/logs.component';
 
@@ -38,7 +37,6 @@ import { LogsComponent } from './logs/logs.component';
         HomeComponent,
         MainComponent,
         ApiComponent,
-        TutorialComponent,
         TutorialThComponent,
         ApiThComponent,
         LogsComponent,

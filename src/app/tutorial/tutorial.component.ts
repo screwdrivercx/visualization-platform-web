@@ -4,11 +4,8 @@ import { first } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { TemplateService,AccountService } from '../_services'
 
-@Component({
-  selector: 'app-tutorial',
-  templateUrl: './tutorial.component.html',
-  styleUrls: ['./tutorial.component.css']
-})
+@Component({ templateUrl: './tutorial.component.html' })
+
 export class TutorialComponent implements OnInit {
   templates: Object;
   apiUrl = environment.apiUrl;
@@ -18,7 +15,7 @@ export class TutorialComponent implements OnInit {
     private templateService : TemplateService) { }
 
   handleChange(){
-    this.router.navigate(['/tutorial/th']);
+    this.router.navigate(['/tutorial-th']);
   }
 
   scroll(el: HTMLElement): void {

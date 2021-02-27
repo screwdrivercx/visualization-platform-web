@@ -13,14 +13,15 @@ import { LogsComponent } from './logs/logs.component';
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const usersModule = () => import('./users/user.module').then(x => x.UsersModule);
 const generateModule = () => import('./generate/generate.module').then(x => x.GenerateModule);
-const templatesModule = () => import('./templates/template.module').then(x => x.TemplatesModule)
+const templatesModule = () => import('./templates/template.module').then(x => x.TemplatesModule);
+const tutorialModule = () => import('./tutorial/tutorial.module').then(x => x.TutorialModule);
 
 const routes: Routes = [
     { path: '', component: MainComponent },
-    { path: 'tutorial', component: TutorialComponent },
-    { path: 'tutorial/th', component: TutorialThComponent },
+    { path: 'tutorial', loadChildren: tutorialModule },
+    { path: 'tutorial-th', component: TutorialThComponent },
     { path: 'api', component: ApiComponent },
-    { path: 'api/th', component: ApiThComponent },
+    { path: 'api-th', component: ApiThComponent },
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'generate', loadChildren: generateModule, canActivate: [AuthGuard], data:{role : ['user','designer']} },
     { path: 'templates', loadChildren: templatesModule, canActivate: [AuthGuard], data:{role : 'designer'} },

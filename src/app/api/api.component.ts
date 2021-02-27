@@ -11,7 +11,7 @@ export class ApiComponent implements OnInit {
   constructor(private router : Router) { }
 
   handleChange(){
-    this.router.navigate(['/api/th']);
+    this.router.navigate(['/api-th']);
   }
 
   scroll(el: HTMLElement): void {

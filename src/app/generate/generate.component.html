@@ -13,7 +13,7 @@
                                     alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title">{{template.TemplateName}}</h5>
-                                    <p class="card-text">Interactive {{template.TemplateName}}</p>
+                                    <p class="card-text">Interactive {{template.TemplateName}}... <a routerLink="/tutorial/details/{{template.id}}">see details</a></p>
                                     <div class="row pl-3 pr-3"> 
                                         <button class="btn btn-sm btn-primary" (click)="setValue(template.TemplateName,template.img,stepper)">Select</button>
                                         <p class="text-success ml-auto" *ngIf="template.TemplateName == vname">Current</p>
@@ -23,42 +23,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-                <!--table class="table table-striped mt-5">
-                    <thead>
-                        <tr>
-                            <th style="width: 40%">Visualization Name</th>
-                            <th style="width: 40%">Status</th>
-                            <th style="width: 20%"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let template of templates">
-                            <td>{{template.TemplateName}}</td>
-                            <td>{{template.status}}</td>
-                            <td><p class="text-success" *ngIf="template.TemplateName == vname">Current</p></td>
-                            <td style="white-space: nowrap">
-                                    <button class="btn btn-sm btn-primary mr-1" (click)="setValue(template.TemplateName,stepper)">Select</button>
-                                    
-                                
-                                <a [routerLink]="['/generate/detail/',template.TemplateName]" class="btn btn-sm btn-primary mr-1" [disabled]="template.status!='active'">Create</a>
-                                <button (click)="deleteUser(user.id,user.username)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting">
-                    <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
-                    <span *ngIf="!user.isDeleting">Delete</span>
-                </button>
-                            </td>
-                        </tr>
-                        <tr *ngIf="!templates">
-                            <td colspan="4" class="text-center">
-                                <span class="spinner-border spinner-border-lg align-center"></span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table-->
             </mat-step>
 
             <mat-step [stepControl]="secondFormGroup" [editable]="true">

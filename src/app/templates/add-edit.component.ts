@@ -12,15 +12,21 @@ export class AddEditComponent implements OnInit {
     isEditMode: boolean;
     loading = false;
     submitted = false;
+    imgInputText: string;
     classInputText: string;
     embeddedInputText: string;
-    imgInputText: string;
+    dataInputText: string;
+    configInputText: string;
     isClassFileChange = false;
     isEmbeddedFileChange = false;
     isImgFileChange = false;
+    isDataFileChange = false;
+    isConfigFileChange = false;
     isClassValid = true;
     isEmbeddedValid = true;
     isImgValid = true;
+    isDataValid = true;
+    isConfigValid = true;
     imgUrl;
     apiUrl = environment.apiUrl;
     preconfig: Object;
@@ -54,7 +60,6 @@ export class AddEditComponent implements OnInit {
                 this.isImgValid = true;
 
                 var mimeType = event.target.files[0].type;
-                console.log(mimeType);
                 if (mimeType.match(/image\/*/) == null) {
                     this.isImgValid = false;
                     this.imgUrl = null;
@@ -67,7 +72,23 @@ export class AddEditComponent implements OnInit {
                     this.imgUrl = reader.result;
                 }
             }
-            else {
+            else if (type == "data") {
+                this.isDataFileChange = true;
+                this.form.patchValue({
+                    dataFileSource: file
+                });
+                this.dataInputText = this.form.get("dataFileSource").value.name;
+                this.isDataValid = true;
+            }
+            else if (type == "config") {
+                this.isConfigFileChange = true;
+                this.form.patchValue({
+                    configFileSource: file
+                });
+                this.configInputText = this.form.get("configFileSource").value.name;
+                this.isConfigValid = true;
+            }
+            else if(type == "embedded"){
                 this.isEmbeddedFileChange = true;
                 this.form.patchValue({
                     embeddedFileSource: file
@@ -77,7 +98,7 @@ export class AddEditComponent implements OnInit {
             }
         }
         else {
-            type == "class" ? this.classInputText = "Select Class File" : this.embeddedInputText = "Select Embedded File";
+            return;
         }
     }
 
@@ -89,36 +110,47 @@ export class AddEditComponent implements OnInit {
         this.imgInputText = "Drag and drop image here or browse file";
         this.classInputText = "Drag and drop Class file here or browse file";
         this.embeddedInputText = "Drag and drop Embedded file here or browse file";
+        this.dataInputText = "Drag and drop example data file here or browse file";
+        this.configInputText = "Drag and drop example config file here or browse file";
 
         if(!this.isEditMode){
             this.form = this.formBuilder.group({
-            templateName: ['', Validators.required],
-            description: ['',Validators.required],
-            class: ['', Validators.required],
-            embedded: ['', Validators.required],
-            img: ['', Validators.required],
-            classFileSource: ['', Validators.required],
-            embeddedFileSource: ['', Validators.required],
-            imgFileSource: ['', Validators.required]
+                templateName: ['', Validators.required],
+                description: ['',Validators.required],
+                img: ['', Validators.required],
+                class: ['', Validators.required],
+                embedded: ['', Validators.required],
+                data: ['',Validators.required],
+                config: ['',Validators.required],
+                imgFileSource: ['', Validators.required],
+                classFileSource: ['', Validators.required],
+                embeddedFileSource: ['', Validators.required],
+                dataFileSource: ['',Validators.required],
+                configFileSource: ['',Validators.required]
             });
         } else {
             this.form = this.formBuilder.group({
                 templateName: [''],
                 description: [''],
+                img: [''],
                 class: [''],
                 embedded: [''],
-                img: [''],
+                data: [''],
+                config: [''],
                 classFileSource: [''],
                 embeddedFileSource: [''],
-                imgFileSource: ['']
-                });
+                imgFileSource: [''],
+                dataFileSource: [''],
+                configFileSource: ['']
+            });
             this.templateService.getById(this.id)
                 .subscribe(res => {
                     this.preconfig = res;
-                    console.log(this.preconfig);
                     this.imgInputText = this.preconfig["img"];
                     this.classInputText = this.preconfig["class_name"];
                     this.embeddedInputText = this.preconfig["embedded_name"];
+                    this.dataInputText = this.preconfig["data_name"];
+                    this.configInputText = this.preconfig["config_name"];
                     this.form.patchValue({
                         templateName : this.preconfig["TemplateName"],
                         description : this.preconfig["description"]
@@ -156,7 +188,15 @@ export class AddEditComponent implements OnInit {
             this.isImgValid = false;
         }
 
-        if (!this.isClassValid || !this.isEmbeddedValid || !this.isImgValid) return;
+        if(this.dataInputText.split(".").pop() != "csv" && this.dataInputText.split(".").pop() != "json"){
+            this.isDataValid = false;
+        }
+      
+        if(this.configInputText.split(".").pop() != "csv" && this.configInputText.split(".").pop() != "json"){
+            this.isConfigValid = false;
+        }
+
+        if (!this.isClassValid || !this.isEmbeddedValid || !this.isImgValid || !this.isDataValid || !this.isConfigValid) return;
 
         this.loading = true;
         const formData = new FormData();
@@ -167,6 +207,8 @@ export class AddEditComponent implements OnInit {
             formData.append('image', this.form.get('imgFileSource').value);
             formData.append('class', this.form.get('classFileSource').value);
             formData.append('embedded', this.form.get('embeddedFileSource').value);
+            formData.append('data', this.form.get('dataFileSource').value);
+            formData.append('config', this.form.get('configFileSource').value);
 
             this.templateService.create(formData)
                 .subscribe({
@@ -180,9 +222,11 @@ export class AddEditComponent implements OnInit {
                     }
                 })
         } else {
-            var blob1 = new Blob([this.preconfig["img_file"]],{ type: this.imgInputText.split(".").pop() == "png" ? 'image/png' : 'image/jpeg'});
-            var blob2 = new Blob([this.preconfig["class_file"]],{ type: 'text/javascript'});
-            var blob3 = new Blob([this.preconfig["embedded_file"]],{ type: 'text/javascript'});
+            var blob1 = new Blob([this.preconfig["class_file"]],{ type: 'text/javascript'});
+            var blob2 = new Blob([this.preconfig["embedded_file"]],{ type: 'text/javascript'});
+            var blob3 = new Blob([this.preconfig["data"]],{ type: this.dataInputText.split(".").pop() == "csv" ? 'application/vnd.ms-excel' : 'application/json'})
+            var blob4 = new Blob([this.preconfig["config"]],{ type: this.configInputText.split(".").pop() == "csv" ? 'application/vnd.ms-excel' : 'application/json'})
+
 
             formData.append('templateName', this.form.get("templateName").value);
             formData.append('description',this.form.get('description').value);
@@ -191,10 +235,16 @@ export class AddEditComponent implements OnInit {
                 formData.append('image', '');
             this.isClassFileChange && this.form.get("classFileSource").value != '' ?
                 formData.append('class', this.form.get("classFileSource").value) :
-                formData.append('class', blob2, this.classInputText);
+                formData.append('class', blob1, this.classInputText);
             this.isEmbeddedFileChange && this.form.get("embeddedFileSource").value != '' ?
                 formData.append('embedded', this.form.get("embeddedFileSource").value) :
-                formData.append('embedded', blob3, this.embeddedInputText);
+                formData.append('embedded', blob2, this.embeddedInputText);
+            this.isDataFileChange && this.form.get("dataFileSource").value != '' ?
+                formData.append('data', this.form.get("dataFileSource").value) :
+                formData.append('data', blob3, this.dataInputText);
+            this.isConfigFileChange && this.form.get("configFileSource").value != '' ?
+                formData.append('config', this.form.get("configFileSource").value) :
+                formData.append('config', blob4, this.configInputText);
 
             this.templateService.update(formData)
                 .subscribe({

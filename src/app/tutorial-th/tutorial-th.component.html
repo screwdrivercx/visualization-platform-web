@@ -31,7 +31,7 @@
                             </ul>
                         </li>
                         <li *ngIf="templates">
-                            <a class="text-primary" (click)="scroll(second)"><u>ตัวอย่างไฟล์ข้อมูลและไฟล์กำหนดค่า</u></a>
+                            <a class="text-primary" (click)="scroll(second)"><u>รายละเอียดเทมเพลตต่างๆ</u></a>
                             <ul *ngIf="templates">
                                 <li *ngFor="let template of templates"><a class="text-primary"
                                         (click)="scroll(second)">{{template.TemplateName}}</a></li>
@@ -105,8 +105,8 @@
 
                     <div #second>
                         <div class="my-5" *ngIf="templates">
-                            <h4>ตัวอย่างไฟล์ข้อมูลและไฟล์กำหนดค่า</h4>
-                            <table class="table table-striped my-3">
+                            <h4>รายละเอียดเทมเพลตต่างๆ</h4>
+                            <table class="table table-hover my-3">
                                 <thead>
                                     <tr>
                                         <th style="width: 50%">เทมเพลต</th>
@@ -115,12 +115,12 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let template of templates">
-                                        <td>{{template.TemplateName}}</td>
+                                        <td><a routerLink="/tutorial/details/{{template.id}}">{{template.TemplateName}}</a></td>
                                         <td>
                                             <a
-                                                href="{{apiUrl}}/static/example-files/{{template.TemplateName}}-data.csv">{{template.TemplateName}}-data.csv</a><br>
+                                                href="{{apiUrl}}/static/example-files/{{template.data}}">{{template.data}}</a><br>
                                             <a
-                                                href="{{apiUrl}}/static/example-files/{{template.TemplateName}}-config.csv">{{template.TemplateName}}-config.csv</a>
+                                                href="{{apiUrl}}/static/example-files/{{template.config}}">{{template.config}}</a>
                                         </td>
                                     </tr>
                                 </tbody>
