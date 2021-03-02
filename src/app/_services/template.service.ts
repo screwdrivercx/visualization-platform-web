@@ -32,6 +32,10 @@ export class TemplateService {
         return this.http.put(`${environment.apiUrl}/api/manageTemplate`, formData);
     }
 
+    updateActivate(id,status){
+        return this.http.put(`${environment.apiUrl}/api/manageTemplate/activate/${id}`, {status: status});
+    }
+
     delete(id){
         return this.http.delete(`${environment.apiUrl}/api/manageTemplate/${id}`)
     }

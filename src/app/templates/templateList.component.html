@@ -13,16 +13,39 @@
         <div *ngIf="templates">
             <div class="row d-flex justify-content-start ml-5">
                 <div *ngFor="let template of templates">
-                    <div class="card m-5" style="width: 20rem;">
-                        <img class="card-img-top" src="{{apiUrl}}/static/{{template.img}}"
-                            alt="Card image cap">
+                    <div *ngIf="template.status=='active'" class="card m-5" style="width: 20rem;">
+                        <img class="card-img-top" src="{{apiUrl}}/static/{{template.img}}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{template.TemplateName}}</h5>
                             <p class="card-text">Interactive {{template.TemplateName}}</p>
                             <div class="row pl-3 pr-3">
                                 <button class="btn btn-sm btn-primary" routerLink="edit/{{template.id}}">Edit</button>
-                                <button (click)="deleteTemplate(template.id,template.TemplateName)"
-                                    class="btn btn-sm btn-danger btn-delete-user ml-3" [disabled]="template.isDeleting">
+                                <button class="btn btn-sm btn-warning ml-3 text-white"
+                                    (click)="changeActivate(template.id,template.status,template.TemplateName)">{{template.status
+                                    == 'active' ? 'Deactive' : 'Active'}}</button>
+                                <button class="btn btn-sm btn-danger btn-delete-user ml-3"
+                                    (click)="deleteTemplate(template.id,template.TemplateName)"
+                                    [disabled]="template.isDeleting">
+                                    <span *ngIf="template.isDeleting" class="spinner-border spinner-border-sm"></span>
+                                    <span *ngIf="!template.isDeleting">Delete</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="template.status=='inactive'" class="card m-5"
+                        style="width: 20rem;background-color: rgba(245, 245, 245, 1);opacity: .5;">
+                        <img class="card-img-top" src="{{apiUrl}}/static/{{template.img}}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{template.TemplateName}}</h5>
+                            <p class="card-text">Interactive {{template.TemplateName}}</p>
+                            <div class="row pl-3 pr-3">
+                                <button class="btn btn-sm btn-primary" routerLink="edit/{{template.id}}">Edit</button>
+                                <button class="btn btn-sm btn-warning ml-3 text-white"
+                                    (click)="changeActivate(template.id,template.status,template.TemplateName)">{{template.status
+                                    == 'active' ? 'Deactive' : 'Active'}}</button>
+                                <button class="btn btn-sm btn-danger btn-delete-user ml-3"
+                                    (click)="deleteTemplate(template.id,template.TemplateName)"
+                                    [disabled]="template.isDeleting">
                                     <span *ngIf="template.isDeleting" class="spinner-border spinner-border-sm"></span>
                                     <span *ngIf="!template.isDeleting">Delete</span>
                                 </button>

@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
 
     updateActivate(refId, status) {
         this.vgenService.updateActivate(refId, status)
-            .subscribe(res => {
+            .subscribe(() => {
                 this.count = 0;
                 this.countActive = 0;
                 this.vgenService.getAll()
