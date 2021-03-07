@@ -4,14 +4,14 @@
     <img src="../assets/image/logo_transparent.png" class="img-fluid" width="32" height="32" class="d-inline-block align-top">    
   </a>
   <div class="navbar-nav">
-    <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-    <a class="nav-item nav-link" routerLink="/tutorial" routerLinkActive="active">Tutorial</a>
+    <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">HOME</a>
+    <a class="nav-item nav-link" routerLink="/tutorial" routerLinkActive="active">TUTORIAL</a>
     <a class="nav-item nav-link" routerLink="/api" routerLinkActive="active">API</a>
-    <a class="nav-item nav-link" target="_blank" rel="noopener noreferrer"  href="https://github.com/nonyo555/Visualization-Platform">Source</a>   
+    <a class="nav-item nav-link" target="_blank" rel="noopener noreferrer"  href="https://github.com/nonyo555/Visualization-Platform">SOURCE</a>   
   </div>
   <ul class="navbar-nav ml-auto">
-    <a class="nav-item nav-link" routerLink="/account/register" routerLinkActive="active">Register</a>
-    <a routerLink="/account/login"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log in</button></a>
+    <a class="nav-item nav-link" routerLink="/account/register" routerLinkActive="active">SIGN UP</a>
+    <a routerLink="/account/login"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">LOG IN</button></a>
   </ul>
 </nav>
 
@@ -20,12 +20,12 @@
     <img src="../assets/image/logo_transparent.png" class="img-fluid" width="32" height="32" class="d-inline-block align-top">    
   </a>
   <div class="navbar-nav">
-      <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-      <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Users</a>
-      <a class="nav-item nav-link" routerLink="/logs" routerLinkActive="active">Logs</a>
+      <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">HOME</a>
+      <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">USERS</a>
+      <a class="nav-item nav-link" routerLink="/logs" routerLinkActive="active">LOGS</a>
   </div>
   <ul class="navbar-nav ml-auto">
-    <a class="nav-item nav-link" (click)="logout()">Log out</a>
+    <a class="nav-item nav-link" (click)="logout()">LOG OUT</a>
   </ul>
 </nav>
 
@@ -34,15 +34,15 @@
     <img src="../assets/image/logo_transparent.png" class="img-fluid" width="32" height="32" class="d-inline-block align-top">    
   </a>
   <div class="navbar-nav">
-      <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-      <a class="nav-item nav-link" routerLink="/tutorial" routerLinkActive="active">Tutorial</a>
+      <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">HOME</a>
+      <a class="nav-item nav-link" routerLink="/tutorial" routerLinkActive="active">TUTORIAL</a>
       <a class="nav-item nav-link" routerLink="/api" routerLinkActive="active">API</a>
-      <a class="nav-item nav-link" target="_blank" rel="noopener noreferrer"  href="https://github.com/nonyo555/Visualization-Platform">Source</a>   
-      <a class="nav-item nav-link" routerLink="/generate" routerLinkActive="active">Generate</a>
-      <a *ngIf="user.role == 'designer'" class="nav-item nav-link" routerLink="/templates" routerLinkActive="active">Templates</a>
+      <a class="nav-item nav-link" target="_blank" rel="noopener noreferrer"  href="https://github.com/nonyo555/Visualization-Platform">SOURCE</a>   
+      <a class="nav-item nav-link" routerLink="/generate" routerLinkActive="active">GENERATE</a>
+      <a *ngIf="user.role == 'designer'" class="nav-item nav-link" routerLink="/templates" routerLinkActive="active">TEMPLATES</a>
   </div>
   <ul class="navbar-nav ml-auto">
-    <a class="nav-item nav-link" (click)="logout()">Log out</a>
+    <a class="nav-item nav-link" (click)="logout()">LOG OUT</a>
   </ul>
 </nav>
 

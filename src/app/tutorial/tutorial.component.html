@@ -18,7 +18,7 @@
 
     <div class="card-body">
         <div class="offset-md-2 col-md-8">
-            <h5>Overview</h5>
+            <h5 class="font-body font-24 mt-5 mb-4"><strong>Overview</strong></h5>
             <ul>
                 <li><a class="text-primary" (click)="scroll(first)"><u>Step-by-Step guide</u></a>
                     <ul>
@@ -38,17 +38,18 @@
                     </ul>
                 </li>
             </ul>
-            <p class="my-5"><strong>*note*</strong> You have to <a routerLink="/account/register"><u>register</u></a>
+            <p class="my-5"><strong>*Note*</strong> You have to <a routerLink="/account/register"><u>register</u></a>
                 and <a routerLink="/account/login"><u>log in</u></a> to visualization platform to start creating
                 visualization.</p>
             <hr>
 
             <div #first>
-                <h4 class="mt-5">Step-by-Step guide</h4><br>
+                <h4 class="font-body font-24 mt-5"><strong>Step-by-Step guide</strong></h4>
                 <p>Here is a step-by-step guide on how to create a visualization on visualization platform.</p>
 
                 <div class="my-5" #first_1>
-                    <p class="mt-5"><strong>1. Select your visualization template.</strong><br><br>
+                    <p class="mt-5"><strong>1. Select your visualization template.</strong></p>
+                    <p>
                         &nbsp;&nbsp;&nbsp;&nbsp;Here, you can choose one of the visualization templates. Click
                         "Select" to move to the next step.</p>
                     <figure class="mb-5">
@@ -117,7 +118,7 @@
 
             <div #second>
                 <div class="my-5" *ngIf="templates">
-                    <h4>Templates Details</h4>
+                    <h4 class="font-body font-24"><strong>Templates Details</strong></h4>
                     <table class="table table-hover my-3">
                         <thead>
                             <tr>

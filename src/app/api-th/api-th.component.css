@@ -1,0 +1,15 @@
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Kanit', serif;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+p,a,th,td,input, button, select, textarea, body, .main-header .list-unstyled > li .btn, .font-body {
+    font-family: "Kanit", serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  p, a{
+      font-size: 16px;
+  }

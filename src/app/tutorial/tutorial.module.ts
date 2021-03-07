@@ -11,7 +11,7 @@ import { TemplateComponent } from './template.component';
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        TutorialRoutingModule,
+        TutorialRoutingModule
     ],
     declarations: [
         LayoutComponent,

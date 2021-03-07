@@ -1,4 +1,17 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@font-face{
+  font-family: Merriweather;
+  src: url(assets/font/Merriweather-Regular.ttf) format("opentype");
+}
+@font-face{
+  font-family: Source Sans Pro;
+  src: url(assets/font/SourceSansPro-Regular.ttf) format("opentype");
+}
+@font-face{
+  font-family: Kanit;
+  src: url(assets/font/Kanit-Regular.ttf) format("opentype");
+}
+
 
 html{
   position: relative;
@@ -13,9 +26,9 @@ body {
   background-size: contain;
   margin-bottom: 200px;
   -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
   font-size: .9375rem;
   font-weight: 400;
-  line-height: 1.5;
   color: #343a40;
   display: block;
   overflow: auto;
@@ -38,6 +51,36 @@ a { cursor: pointer; }
 
 h1{
   margin-top: 2%;
+  font-size: 54px;
+  line-height: 1.45;
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+}
+
+input strong, button strong, select strong, textarea strong, body strong, .main-header .list-unstyled > li .btn strong, .font-body strong {
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+}
+
+.card h1, .card h2, .card h3, .card h4, .card h5, .card h6 {
+  color: #4a4a4a;
+  font-family: "Source Sans Pro", lucida grande, Arial, sans-serif;
+}
+
+.font-16{
+  font-size: 16px;
+}
+
+.font-20{
+  font-size: 20px;
+}
+
+.font-24{
+  font-size: 24px;
 }
 
 .app-container {
@@ -79,4 +122,21 @@ iframe {
   width: 300px;
   resize: both;
   overflow: auto;
+}
+
+.btn-dark-blue {
+  background: #7474BF;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #348AC7, #7474BF);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #348AC7, #7474BF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fff;
+}
+.btn-dark-blue:hover {
+  background: #7474BF;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #348AC7, #7474BF);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #348AC7, #7474BF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: aliceblue;
+}
+
+.btn-rounded{
+  border-radius: 35px;
 }

@@ -7,6 +7,7 @@ import { AddEditComponent } from './add-edit.component';
 import { MatIconModule } from '@angular/material/icon';
 import { TemplateListComponent } from './templateList.component';
 import { MatButtonModule } from '@angular/material/button';
+import { AngularEditorModule } from '@kolkov/angular-editor'
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
         ReactiveFormsModule,
         TemplatesRoutingModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        AngularEditorModule
     ],
     declarations: [
         LayoutComponent,
