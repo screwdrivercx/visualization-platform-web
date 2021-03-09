@@ -1,0 +1,30 @@
+<div class="card">
+    <h4 class="card-header">Announcements</h4>
+    <div class="card-body col-md-8 offset-md-2 my-5">
+        <table *ngIf="announcements" mdbTable class="table" #tableEl="mdbTable">
+            <tbody>
+                <tr *ngFor="let announcement of announcements; let i = index">
+                    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"><a routerLink="/announcement/details/{{announcement.id}}" style="color: black;">{{announcement.title}}</a></td>
+                    <td> <button *ngIf="user.id==announcement.uid" class="btn btn-sm  btn-primary ml-3" routerLink="/announcement/edit/{{announcement.id}}">edit</button></td>
+                    <td> <button *ngIf="user.id==announcement.uid" (click)="delete(announcement.id)"
+                        class="btn btn-sm btn-danger btn-delete-user" [disabled]="announcement.isDeleting">
+                        <span *ngIf="announcement.isDeleting" class="spinner-border spinner-border-sm"></span>
+                        <span *ngIf="!announcement.isDeleting">Delete</span>
+                    </button></td>
+                </tr>
+                <tr *ngIf="!announcements">
+                    <td colspan="6" class="text-center">
+                        <span class="spinner-border spinner-border-lg align-center"></span>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot class="grey lighten-5 w-100">
+                <tr>
+                  <td colspan="6">
+                    <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="announcements"></mdb-table-pagination>
+                  </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

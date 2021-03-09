@@ -60,3 +60,24 @@ mdb-carousel-item{
     border-radius: 20px;
 }
 
+#myVideo {
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+/* Add some content at the bottom of the video/page */
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+.content > p{
+  color:darkgray;
+}

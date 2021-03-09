@@ -4,7 +4,6 @@ import { ApiComponent } from './api/api.component';
 import { ApiThComponent } from './api-th/api-th.component';
 import { HomeComponent } from './home';
 import { MainComponent } from './main/main.component';
-import { TutorialComponent } from './tutorial/tutorial.component';
 import { TutorialThComponent } from './tutorial-th/tutorial-th.component'
 import { AuthGuard } from './_helpers';
 import { LogsComponent } from './logs/logs.component';
@@ -15,6 +14,7 @@ const usersModule = () => import('./users/user.module').then(x => x.UsersModule)
 const generateModule = () => import('./generate/generate.module').then(x => x.GenerateModule);
 const templatesModule = () => import('./templates/template.module').then(x => x.TemplatesModule);
 const tutorialModule = () => import('./tutorial/tutorial.module').then(x => x.TutorialModule);
+const announcementModule = () => import('./announcement/announcement.module').then(x => x.AnnouncementModule)
 
 const routes: Routes = [
     { path: '', component: MainComponent },
@@ -28,6 +28,7 @@ const routes: Routes = [
     { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard], data: {role: ['admin','superadmin']} },
     { path: 'logs' , component: LogsComponent, canActivate : [AuthGuard], data: {role : ['admin','superadmin']}},
     { path: 'account', loadChildren: accountModule },
+    { path: 'announcement', loadChildren: announcementModule },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

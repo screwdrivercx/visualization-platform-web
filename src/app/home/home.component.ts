@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models';
-import { AccountService, AlertService, VgenService, TemplateService } from '../_services';
+import { AccountService, AlertService, VgenService, TemplateService, AnnouncementService } from '../_services';
 import { OwlOptions } from 'ngx-owl-carousel-o'
 
-@Component({ templateUrl: 'home.component.html' })
+@Component({ templateUrl: 'home.component.html', styleUrls: ['./home.component.css']})
 export class HomeComponent implements OnInit {
     user: User;
     items = null;
@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
     countActive = 0;
     apiUrl = environment.apiUrl;
     templates = null;
+    announcements = null
+
     customOptions: OwlOptions = {
         loop: true,
         mouseDrag: true,
@@ -46,7 +48,8 @@ export class HomeComponent implements OnInit {
     constructor(private accountService: AccountService,
         private vgenService: VgenService,
         private alertService: AlertService,
-        private TemplateService: TemplateService
+        private TemplateService: TemplateService,
+        private announcementService: AnnouncementService
     ) { }
 
     updateActivate(refId, status) {
@@ -94,6 +97,11 @@ export class HomeComponent implements OnInit {
         this.role = this.accountService.getRole();
         this.user = this.accountService.userValue;
         if (this.role == "user" || this.role == "designer") {
+            this.announcementService.getLatest()
+                .pipe(first())
+                .subscribe((ann: any[]) => {
+                    this.announcements = ann;
+                })
             this.TemplateService.getAll()
                 .pipe(first())
                 .subscribe((templates: any[]) => {
@@ -116,5 +124,16 @@ export class HomeComponent implements OnInit {
 
     }
 
-
+    delete_(id: string) {
+        let confirm_text = "Are you sure to delete this announcement ? This announcement will be deleted permanently."
+        if(confirm(confirm_text)) {
+            const announcement = this.announcements.find(x => x.id === id);
+            announcement.isDeleting = true;
+            this.announcementService.delete(id)
+                .pipe(first())
+                .subscribe(() => {
+                    this.announcements = this.announcements.filter(x => x.id !== id);
+                });
+          }
+    }
 }
