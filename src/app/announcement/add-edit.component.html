@@ -1,12 +1,10 @@
 <div class="card my-5">
-    <div class="card-header">
-        <h4 *ngIf="isEditMode">Edit Announcement</h4>
-        <h4 *ngIf="!isEditMode">Add Announcement</h4>
-    </div>
-    <div class="card-body">
+    <h4 class="card-header" *ngIf="isEditMode">Edit Announcement</h4>
+    <h4 class="card-header" *ngIf="!isEditMode">Add Announcement</h4>
+    <div class="card-body my-5">
         <div class="col-md-8 offset-md-2">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <div class="form-group mt-5 mb-5">
+                <div class="form-group mb-5">
                     <h6>Title </h6>
                     <input type="text" formControlName="title" class="form-control mt-3"
                         [ngClass]="{ 'is-invalid': submitted && f.title.errors}" />

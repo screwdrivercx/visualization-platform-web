@@ -1,6 +1,10 @@
 <div class="card">
     <h4 class="card-header">Announcements</h4>
     <div class="card-body col-md-8 offset-md-2 my-5">
+        <div class="row mb-3 mx-1">
+            <a class="btn btn-success ml-auto" *ngIf="user.role == 'designer'"
+                routerLink="/announcement/add">+ add new announcement</a>
+        </div>
         <table *ngIf="announcements" mdbTable class="table" #tableEl="mdbTable">
             <tbody>
                 <tr *ngFor="let announcement of announcements; let i = index">

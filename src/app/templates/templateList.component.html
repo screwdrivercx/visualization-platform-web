@@ -1,15 +1,13 @@
 <div class="card my-5">
-    <div class="card-header">
-        <div class="row mx-2">
-            <h4>Templates</h4>
+    <h4 class="card-header">Templates</h4>
+    <div class="card-body">
+        <div class="row d-flex align-items-end mx-2">
             <div class="ml-auto">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <button class="btn btn-success" routerLink="add">Add Template</button>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card-body">
         <div *ngIf="templates">
             <div class="row d-flex justify-content-start ml-5">
                 <div *ngFor="let template of templates">

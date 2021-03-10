@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../_models';
 import { AccountService } from '../_services';
 import { Router } from '@angular/router'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-main',
@@ -9,9 +10,10 @@ import { Router } from '@angular/router'
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-
   title = "visualization-platform";
-    user: User;
+  user: User;
+  apiUrl = environment.apiUrl;
+
 
     constructor(private accountService: AccountService,
                 private router : Router) { }

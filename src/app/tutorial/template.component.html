@@ -1,8 +1,5 @@
 <div *ngIf="template" class="card my-5">
-    <div class="card-header">
-        <h4>{{template.TemplateName}}</h4>
-    </div>
-
+    <h4 class="card-header">{{template.TemplateName}}</h4>
     <div class="card-body">
             <div class="col-md-8 offset-md-2 mb-5 mt-5">
                 <div [innerHTML]="template.description"></div>

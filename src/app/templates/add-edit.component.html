@@ -1,8 +1,6 @@
 <div class="card my-5">
-    <div class="card-header">
-        <h4 *ngIf="isEditMode">Edit Template</h4>
-        <h4 *ngIf="!isEditMode">Add Template</h4>
-    </div>
+        <h4 class="card-header" *ngIf="isEditMode">Edit Template</h4>
+        <h4 class="card-header" *ngIf="!isEditMode">Add Template</h4>
     <div class="card-body">
         <div class="col-md-8 offset-md-2">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">

@@ -1,17 +1,34 @@
 <!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="!user">
-  <a class="navbar-brand" routerLink="/home" routerLinkActive="active">
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="!user && !isHome">
+  <a class="navbar-brand" routerLink="/" routerLinkActive="active" (click)="toHome()">
     <img src="../assets/image/logo_transparent.png" class="img-fluid" width="32" height="32" class="d-inline-block align-top">    
   </a>
   <div class="navbar-nav">
-    <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">HOME</a>
-    <a class="nav-item nav-link" routerLink="/tutorial" routerLinkActive="active">TUTORIAL</a>
-    <a class="nav-item nav-link" routerLink="/api" routerLinkActive="active">API</a>
+    <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="toHome()">HOME</a>
+    <a class="nav-item nav-link" routerLink="/tutorial" routerLinkActive="active" (click)="toOther()">TUTORIAL</a>
+    <a class="nav-item nav-link" routerLink="/api" routerLinkActive="active" (click)="toOther()">API</a>
     <a class="nav-item nav-link" target="_blank" rel="noopener noreferrer"  href="https://github.com/nonyo555/Visualization-Platform">SOURCE</a>   
   </div>
   <ul class="navbar-nav ml-auto">
-    <a class="nav-item nav-link" routerLink="/account/register" routerLinkActive="active">SIGN UP</a>
-    <a routerLink="/account/login"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">LOG IN</button></a>
+    <a class="nav-item nav-link" routerLink="/account/register" routerLinkActive="active" (click)="toOther()">SIGN UP</a>
+    <a routerLink="/account/login"><button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="toOther()">LOG IN</button></a>
+  </ul>
+</nav>
+
+<!-- nav -->
+<nav class="navbar navbar-expand navbar-dark" *ngIf="!user && isHome">
+  <a class="navbar-brand" routerLink="/" routerLinkActive="active" (click)="toHome()">
+    <img src="../assets/image/logo_transparent.png" class="img-fluid" width="32" height="32" class="d-inline-block align-top">    
+  </a>
+  <div class="navbar-nav">
+    <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="toHome()">HOME</a>
+    <a class="nav-item nav-link" routerLink="/tutorial" routerLinkActive="active" (click)="toOther()">TUTORIAL</a>
+    <a class="nav-item nav-link" routerLink="/api" routerLinkActive="active" (click)="toOther()">API</a>
+    <a class="nav-item nav-link" target="_blank" rel="noopener noreferrer"  href="https://github.com/nonyo555/Visualization-Platform">SOURCE</a>   
+  </div>
+  <ul class="navbar-nav ml-auto">
+    <a class="nav-item nav-link" routerLink="/account/register" routerLinkActive="active" (click)="toOther()">SIGN UP</a>
+    <a routerLink="/account/login"><button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="toOther()">LOG IN</button></a>
   </ul>
 </nav>
 
