@@ -24,6 +24,10 @@ export class TemplateService {
         return this.http.get(`${environment.apiUrl}/api/manageTemplate/id/${id}`);
     }
 
+    getFile(id){
+        return this.http.get(`${environment.apiUrl}/api/manageTemplate/file/${id}`);
+    }
+
     create(formData){
         return this.http.post(`${environment.apiUrl}/api/manageTemplate`, formData);
     }

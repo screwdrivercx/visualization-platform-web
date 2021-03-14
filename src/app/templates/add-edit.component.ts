@@ -196,7 +196,7 @@ export class AddEditComponent implements OnInit {
                 dataFileSource: [''],
                 configFileSource: ['']
             });
-            this.templateService.getById(this.id)
+            this.templateService.getFile(this.id)
                 .subscribe(res => {
                     this.preconfig = res;
                     this.imgInputText = this.preconfig["img"];

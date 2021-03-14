@@ -7,7 +7,7 @@
         </div>
         <table *ngIf="announcements" mdbTable class="table" #tableEl="mdbTable">
             <tbody>
-                <tr *ngFor="let announcement of announcements; let i = index">
+                <tr *ngFor="let announcement of announcements.reverse();; let i = index">
                     <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"><a routerLink="/announcement/details/{{announcement.id}}" style="color: black;">{{announcement.title}}</a></td>
                     <td> <button *ngIf="user.id==announcement.uid" class="btn btn-sm  btn-primary ml-3" routerLink="/announcement/edit/{{announcement.id}}">edit</button></td>
                     <td> <button *ngIf="user.id==announcement.uid" (click)="delete(announcement.id)"
