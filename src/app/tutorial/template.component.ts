@@ -9,7 +9,7 @@ import { TemplateService } from '../_services'
 
 export class TemplateComponent implements OnInit {
   id: number;
-  template: Object;
+  template: any;
   apiUrl = environment.apiUrl;
   tryDoctype;
 
