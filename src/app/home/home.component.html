@@ -133,9 +133,9 @@
                                         <a class="btn btn-sm btn-secondary disabled mr-1"
                                             *ngIf="item.status=='inactive'">View</a>
                                         <div ngbDropdown class="d-inline-block float_right" placement="bottom-right">
-                                            <button class="btn btn-sm btn-outline-primary" id="dropdownMenu1"
-                                                ngbDropdownToggle>Manage</button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu1" ngbDropdownMenu>
+                                            <button ngbDropdownToggle class="btn btn-sm btn-outline-primary" id="dropdownMenu1"
+                                                >Manage</button>
+                                            <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                 <a *ngIf="item.status=='active'"
                                                     routerLink="/generate/edit/{{item.refId}}"><button
                                                         class="dropdown-item"

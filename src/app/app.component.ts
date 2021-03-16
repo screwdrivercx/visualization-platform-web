@@ -6,7 +6,7 @@ import { User } from './_models/user';
 export class AppComponent implements OnInit{
     title = "visualization-platform";
     user: User;
-    isHome:Boolean;
+    isHome = false;
 
     constructor(private accountService: AccountService) {
         this.accountService.user.subscribe(x => this.user = x);
@@ -19,21 +19,18 @@ export class AppComponent implements OnInit{
         }else{
             this.isHome = false;
         }
-        
-        console.log(this.isHome)
     }
 
     toHome(){
         this.isHome = true;
-        console.log(this.isHome)
     }
 
     toOther(){
         this.isHome = false;
-        console.log(this.isHome)
     }
 
     logout() {
+        this.isHome = false;
         this.accountService.logout();
     }
 }
