@@ -1,7 +1,7 @@
 <div class="card min-vh-80">
     <h4 class="card-header">Generate Visualizations</h4>
     <div class="card-body">
-        
+
         <mat-horizontal-stepper #stepper linear >
             <mat-step class="pl-3" [stepControl]="firstFormGroup" [editable]="true">
                 <ng-template matStepLabel><h5>Select Template</h5></ng-template>
@@ -13,11 +13,13 @@
                                     alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title">{{template.TemplateName}}</h5>
-                                    <p class="card-text">Interactive {{template.TemplateName}}... <a routerLink="/tutorial/details/{{template.id}}">see details</a></p>
-                                    <div class="row pl-3 pr-3"> 
+                                      <div class="card-text" [innerHTML]="template.description.substring(0,100)" style="height:48px; overflow-y: hidden;">
+                                      </div>
+                                      <a routerLink="/tutorial/details/{{template.id}}">see details</a>
+                                    <div class="row pl-3 pr-3 mt-2">
                                         <button class="btn btn-sm btn-primary" (click)="setValue(template.TemplateName,template.img,stepper)">Select</button>
                                         <p class="text-success ml-auto" *ngIf="template.TemplateName == vname">Current</p>
-                                    </div>                           
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -31,7 +33,7 @@
                 <form [formGroup]="secondFormGroup">
                     <div class="form-group mt-5 mb-5">
                         <h6>Please Input Data File :</h6>
-                        <div class="custom-file">              
+                        <div class="custom-file">
                             <input type="file" class="custom-file-input" formControlName="data"
                                 (change)="onFileChange('data',$event)"
                                 [ngClass]="{ 'is-invalid': (submitted && f.data.errors) || (submitted && !isDataValid)}"
@@ -52,13 +54,13 @@
                     </div>
                     <div class="form-group mt-5 mb-5">
                         <h6>Please Input Config File :</h6>
-                        <div class="custom-file"> 
+                        <div class="custom-file">
                             <input type="file" class="custom-file-input" id="customFile" formControlName="config"
                                 (change)="onFileChange('config',$event)"
                                 [ngClass]="{ 'is-invalid': (submitted && f.config.errors) || (submitted && !isConfigValid)}"
-                                accept=".csv,.json">    
+                                accept=".csv,.json">
                             <label *ngIf="!isEditMode && !isConfigFileChange" class="custom-file-label text-secondary"
-                                for="customFile">{{configInputText}}      <mat-icon>library_add</mat-icon></label>    
+                                for="customFile">{{configInputText}}      <mat-icon>library_add</mat-icon></label>
                             <label *ngIf="isConfigFileChange" class="custom-file-label"
                                 for="customFile">{{configInputText}}</label>
                             <label *ngIf="isEditMode && !isConfigFileChange" class="custom-file-label text-secondary"
@@ -80,7 +82,7 @@
                         </button>
                             <a class="ml-auto pr-3 mt-2" routerLink="/tutorial"><u>What is Data and Config File?</u></a>
                         </div>
-                        
+
                         <!--a routerLink="/generate" class="btn btn-link">Cancel</a-->
                     </div>
                 </form>
@@ -109,7 +111,7 @@
                     <button *ngIf="isEditMode" class="btn btn-success" (click)="onSubmit()">Edit</button>
                 </div>
                 </div>
-                
+
             </mat-step>
 
         </mat-horizontal-stepper>

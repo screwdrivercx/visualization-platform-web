@@ -15,8 +15,10 @@
                         <img class="card-img-top" src="{{apiUrl}}/static/{{template.img}}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{template.TemplateName}}</h5>
-                            <p class="card-text">Interactive {{template.TemplateName}}</p>
-                            <div class="row pl-3 pr-3">
+                            <div class="card-text" [innerHTML]="template.description.substring(0,100)" style="height:48px; overflow-y: hidden;">
+                            </div>
+                            <a routerLink="/tutorial/details/{{template.id}}">see details</a>
+                            <div class="row pl-3 pr-3 mt-2">
                                 <button class="btn btn-sm btn-primary" routerLink="edit/{{template.id}}">Edit</button>
                                 <button class="btn btn-sm btn-warning ml-3 text-white"
                                     (click)="changeActivate(template.id,template.status,template.TemplateName)">{{template.status
@@ -35,8 +37,10 @@
                         <img class="card-img-top" src="{{apiUrl}}/static/{{template.img}}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{template.TemplateName}}</h5>
-                            <p class="card-text">Interactive {{template.TemplateName}}</p>
-                            <div class="row pl-3 pr-3">
+                            <div class="card-text" [innerHTML]="template.description.substring(0,100)" style="height:48px; overflow-y: hidden;">
+                            </div>
+                            <a routerLink="/tutorial/details/{{template.id}}">see details</a>
+                            <div class="row pl-3 pr-3 mt-2">
                                 <button class="btn btn-sm btn-primary" routerLink="edit/{{template.id}}">Edit</button>
                                 <button class="btn btn-sm btn-warning ml-3 text-white"
                                     (click)="changeActivate(template.id,template.status,template.TemplateName)">{{template.status
