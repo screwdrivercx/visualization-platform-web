@@ -22,7 +22,7 @@
                                 <button class="btn btn-sm btn-primary" routerLink="edit/{{template.id}}">Edit</button>
                                 <button class="btn btn-sm btn-warning ml-3 text-white"
                                     (click)="changeActivate(template.id,template.status,template.TemplateName)">{{template.status
-                                    == 'active' ? 'Deactive' : 'Active'}}</button>
+                                    == 'active' ? 'Deactivate' : 'Activate'}}</button>
                                 <button class="btn btn-sm btn-danger btn-delete-user ml-3"
                                     (click)="deleteTemplate(template.id,template.TemplateName)"
                                     [disabled]="template.isDeleting">
@@ -44,7 +44,7 @@
                                 <button class="btn btn-sm btn-primary" routerLink="edit/{{template.id}}">Edit</button>
                                 <button class="btn btn-sm btn-warning ml-3 text-white"
                                     (click)="changeActivate(template.id,template.status,template.TemplateName)">{{template.status
-                                    == 'active' ? 'Deactive' : 'Active'}}</button>
+                                    == 'active' ? 'Deactivate' : 'Activate'}}</button>
                                 <button class="btn btn-sm btn-danger btn-delete-user ml-3"
                                     (click)="deleteTemplate(template.id,template.TemplateName)"
                                     [disabled]="template.isDeleting">

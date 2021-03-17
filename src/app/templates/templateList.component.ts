@@ -19,7 +19,7 @@ export class TemplateListComponent implements OnInit {
     private alertService: AlertService) { }
 
   changeActivate(id: Number, status: string, templateName: string) {
-    let confirm_text = "Are you sure to " + status == "active" ? "deactive" : "active" + " template " + templateName + " ? This change will affect all users."
+    let confirm_text = "Are you sure to " + status == "active" ? "deactivate" : "activate" + " template " + templateName + " ? This change will affect all users."
     if (confirm(confirm_text)) {
       const template = this.templates.find(x => x.id === id);
       template.isDeleting = true;
