@@ -38,7 +38,7 @@
                 <div class="card-body">
                     <div *ngIf="items">
                         <div class="row d-flex justify-content-start ">
-                            <div *ngFor="let item of (items | slice: -3).reverse();">
+                            <div *ngFor="let item of (items | slice: 0:3)">
                                 <a *ngIf="item.status=='active'" routerLink="/generate/result/{{item.refId}}"
                                     style="color: inherit;text-decoration: none;">
                                     <div class="card m-3" style="width: 18rem;">
@@ -120,7 +120,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of items.reverse();">
+                                <tr *ngFor="let item of items">
                                     <td>{{item.refId}}</td>
                                     <td>{{item.template}}</td>
                                     <td>

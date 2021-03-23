@@ -105,7 +105,7 @@ export class HomeComponent implements OnInit {
             this.TemplateService.getAll()
                 .pipe(first())
                 .subscribe((templates: any[]) => {
-                    this.templates = templates
+                    this.templates = templates;
                 });
             this.vgenService.getAll()
                 .pipe(first())
@@ -118,7 +118,7 @@ export class HomeComponent implements OnInit {
                             this.count++;
                         }
                     });
-                    this.items = items;
+                    this.items = items.reverse();
                 });
         }
 
