@@ -22,13 +22,13 @@ const routes: Routes = [
     { path: 'tutorial-th', component: TutorialThComponent },
     { path: 'api', component: ApiComponent },
     { path: 'api-th', component: ApiThComponent },
-    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard], data:{ role: ['user','designer','admin','superadmin']} },
     { path: 'generate', loadChildren: generateModule, canActivate: [AuthGuard], data:{role : ['user','designer']} },
     { path: 'templates', loadChildren: templatesModule, canActivate: [AuthGuard], data:{role : 'designer'} },
     { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard], data: {role: ['admin','superadmin']} },
     { path: 'logs' , component: LogsComponent, canActivate : [AuthGuard], data: {role : ['admin','superadmin']}},
     { path: 'account', loadChildren: accountModule },
-    { path: 'announcement', loadChildren: announcementModule },
+    { path: 'announcement', loadChildren: announcementModule, canActivate: [AuthGuard], data: {role: ['user','designer']} },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

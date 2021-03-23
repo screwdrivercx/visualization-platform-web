@@ -69,6 +69,8 @@ export class AddEditComponent implements OnInit {
           },
         ],
         sanitize: true,
+        //uploadUrl : this.apiUrl,
+        //uploadWithCredentials: false,
         toolbarPosition: 'top',
         toolbarHiddenButtons: [
             [
@@ -77,8 +79,8 @@ export class AddEditComponent implements OnInit {
               ],
               [
                 'customClasses',
-                'insertImage',
                 'insertVideo',
+                'insertImage',
                 'removeFormat',
               ]
         ]
@@ -211,7 +213,7 @@ export class AddEditComponent implements OnInit {
                     this.imgUrl = this.apiUrl + "/static/" + this.preconfig["img"]
                 })
         }
-        
+
 
     }
 
@@ -244,7 +246,7 @@ export class AddEditComponent implements OnInit {
         if(this.dataInputText.split(".").pop() != "csv" && this.dataInputText.split(".").pop() != "json"){
             this.isDataValid = false;
         }
-      
+
         if(this.configInputText.split(".").pop() != "csv" && this.configInputText.split(".").pop() != "json"){
             this.isConfigValid = false;
         }
@@ -253,7 +255,7 @@ export class AddEditComponent implements OnInit {
 
         this.loading = true;
         const formData = new FormData();
-        
+
         if (!this.isEditMode) {
             formData.append('templateName', this.form.get("templateName").value);
             formData.append('description',this.form.get('description').value);
