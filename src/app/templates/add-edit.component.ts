@@ -279,8 +279,8 @@ export class AddEditComponent implements OnInit {
         } else {
             var blob1 = new Blob([this.preconfig["class_file"]],{ type: 'text/javascript'});
             var blob2 = new Blob([this.preconfig["embedded_file"]],{ type: 'text/javascript'});
-            var blob3 = new Blob([this.preconfig["data"]],{ type: this.dataInputText.split(".").pop() == "csv" ? 'application/vnd.ms-excel' : 'application/json'})
-            var blob4 = new Blob([this.preconfig["config"]],{ type: this.configInputText.split(".").pop() == "csv" ? 'application/vnd.ms-excel' : 'application/json'})
+            var blob3 = new Blob([this.preconfig["data_file"]],{ type: this.dataInputText.split(".").pop() == "csv" ? 'application/vnd.ms-excel' : 'application/json'})
+            var blob4 = new Blob([this.preconfig["config_file"]],{ type: this.configInputText.split(".").pop() == "csv" ? 'application/vnd.ms-excel' : 'application/json'})
 
 
             formData.append('templateName', this.form.get("templateName").value);
