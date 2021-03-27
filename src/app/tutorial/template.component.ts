@@ -24,7 +24,9 @@ export class TemplateComponent implements OnInit {
     this.templateService.getById(this.id)
       .pipe(first())
       .subscribe(template => {
+        let enc = new TextDecoder("utf-8");
         this.template = template
+        this.template.description = enc.decode(new Uint8Array(this.template.description.data))
         this.tryDoctype = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.apiUrl}/static/example-${this.template["TemplateName"]}.html`);
       });
   }
