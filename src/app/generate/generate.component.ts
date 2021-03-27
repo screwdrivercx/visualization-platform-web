@@ -97,7 +97,14 @@ export class GenerateComponent implements OnInit {
     this.isEditMode = this.refId ? true : false;
     this.TemplateService.getAll()
       .pipe(first())
-      .subscribe(templates => this.templates = templates);
+      .subscribe(templates => {
+        this.templates = templates
+        this.templates.forEach(template => {   
+          let enc = new TextDecoder("utf-8");
+          template.description = enc.decode(new Uint8Array(template.description.data))
+      });
+
+      });
 
       this.dataInputText = "Drag and drop Data file here or browse file";
       this.configInputText = "Drag and drop Config file here or browse file";
@@ -114,7 +121,6 @@ export class GenerateComponent implements OnInit {
           configFileSource: ['', Validators.required]
         });
       }
-      
     if(this.isEditMode){
       this.secondFormGroup = this._formBuilder.group({
           data: [''],

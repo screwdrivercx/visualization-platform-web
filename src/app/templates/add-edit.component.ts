@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService, TemplateService } from '../_services';
 import { environment } from 'src/environments/environment';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-
 @Component({ templateUrl: 'add-edit.component.html' })
 export class AddEditComponent implements OnInit {
     form: FormGroup;
@@ -80,13 +79,13 @@ export class AddEditComponent implements OnInit {
               [
                 'customClasses',
                 'insertVideo',
-                'insertImage',
+                'link',
+                'unlink',
+                'backgroundColor',
                 'removeFormat',
               ]
         ]
     };
-
-
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -120,7 +119,6 @@ export class AddEditComponent implements OnInit {
                     this.imgUrl = null;
                     return;
                 }
-
                 var reader = new FileReader();
                 reader.readAsDataURL(event.target.files[0]);
                 reader.onload = (_event) => {
@@ -198,8 +196,10 @@ export class AddEditComponent implements OnInit {
                 dataFileSource: [''],
                 configFileSource: ['']
             });
+           
             this.templateService.getFile(this.id)
                 .subscribe(res => {
+                    let enc = new TextDecoder("utf-8");
                     this.preconfig = res;
                     this.imgInputText = this.preconfig["img"];
                     this.classInputText = this.preconfig["class_name"];
@@ -208,7 +208,8 @@ export class AddEditComponent implements OnInit {
                     this.configInputText = this.preconfig["config_name"];
                     this.form.patchValue({
                         templateName : this.preconfig["TemplateName"],
-                        description : this.preconfig["description"]
+                        description : enc.decode(new Uint8Array(this.preconfig["description"].data))
+                        
                     })
                     this.imgUrl = this.apiUrl + "/static/" + this.preconfig["img"]
                 })
@@ -284,7 +285,8 @@ export class AddEditComponent implements OnInit {
 
 
             formData.append('templateName', this.form.get("templateName").value);
-            formData.append('description',this.form.get('description').value);
+            formData.append('description', this.form.get('description').value);
+            
             this.isImgFileChange && this.form.get("imgFileSource").value != '' ?
                 formData.append('image', this.form.get("imgFileSource").value) :
                 formData.append('image', '');
@@ -300,7 +302,6 @@ export class AddEditComponent implements OnInit {
             this.isConfigFileChange && this.form.get("configFileSource").value != '' ?
                 formData.append('config', this.form.get("configFileSource").value) :
                 formData.append('config', blob4, this.configInputText);
-
             this.templateService.update(formData)
                 .subscribe({
                     next: () => {
