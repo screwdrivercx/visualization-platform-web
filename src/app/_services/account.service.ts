@@ -84,6 +84,14 @@ export class AccountService {
             }));
     }
 
+    forgotPassword(email){
+      return this.http.post(`${environment.apiUrl}/api/authentication/forgot`, email)
+    }
+
+    resetPassword(token, password){
+      return this.http.post(`${environment.apiUrl}/api/authentication/reset/${token}`, {password})
+    }
+
     getAllLog(){
         return this.http.get(`${environment.apiUrl}/api/authentication/log/all`);
     }

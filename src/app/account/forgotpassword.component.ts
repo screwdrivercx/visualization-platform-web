@@ -5,8 +5,8 @@ import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '../_services';
 
-@Component({ templateUrl: 'register.component.html' })
-export class RegisterComponent implements OnInit {
+@Component({ templateUrl: 'forgotpassword.component.html' })
+export class ForgotPasswordComponent implements OnInit {
     form: FormGroup;
     loading = false;
     submitted = false;
@@ -16,16 +16,12 @@ export class RegisterComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private accountService: AccountService,
-        private alertService: AlertService
+        private alertService: AlertService,
     ) { }
 
     ngOnInit() {
         this.form = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]],
-            email: ['', [Validators.required,Validators.email]]
+          email: ['', [Validators.required, Validators.email]],
         });
     }
 
@@ -44,11 +40,11 @@ export class RegisterComponent implements OnInit {
         }
 
         this.loading = true;
-        this.accountService.register(this.form.value)
+        this.accountService.forgotPassword(this.form.value)
             .pipe(first())
             .subscribe({
                 next: () => {
-                    this.alertService.success('Registration successful', { keepAfterRouteChange: true });
+                    this.alertService.success("Email has been sent to '"+ this.form.get("email").value +"'. \nPlease check your inbox.", { keepAfterRouteChange: true });
                     this.router.navigate(['../login'], { relativeTo: this.route });
                 },
                 error: error => {

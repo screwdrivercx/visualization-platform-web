@@ -17,10 +17,14 @@
                 </div>
             </div>
             <div class="form-group">
+              <div class="row mx-1">
                 <button [disabled]="loading" class="btn btn-dark-blue btn-rounded">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     Log In
-                </button>            
+                </button>
+                <a class="ml-auto mt-2" routerLink="../forgotpassword"><u>forgot password?</u></a>
+              </div>
+
             </div>
         </form>
     </div>
