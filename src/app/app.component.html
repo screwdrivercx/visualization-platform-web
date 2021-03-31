@@ -1,14 +1,14 @@
 <!-- nav -->
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="!user && !isHome">
   <a class="navbar-brand" routerLink="/" routerLinkActive="active" (click)="toHome()">
-    <img src="../assets/image/logo_transparent.png" class="img-fluid" width="32" height="32" class="d-inline-block align-top">  
+    <img src="../assets/image/logo_transparent.png" class="img-fluid" width="32" height="32" class="d-inline-block align-top">
     Visualization Platform
   </a>
   <div class="navbar-nav">
     <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="toHome()">HOME</a>
     <a class="nav-item nav-link" routerLink="/tutorial" routerLinkActive="active" (click)="toOther()">TUTORIAL</a>
     <a class="nav-item nav-link" routerLink="/api" routerLinkActive="active" (click)="toOther()">API</a>
-    <a class="nav-item nav-link" target="_blank" rel="noopener noreferrer"  href="https://github.com/nonyo555/Visualization-Platform">SOURCE</a>   
+    <a class="nav-item nav-link" target="_blank" rel="noopener noreferrer"  href="https://github.com/nonyo555/Visualization-Platform">SOURCE</a>
   </div>
   <ul class="navbar-nav ml-auto">
     <a class="nav-item nav-link" routerLink="/account/register" routerLinkActive="active" (click)="toOther()">SIGN UP</a>
@@ -19,14 +19,14 @@
 <!-- nav -->
 <nav class="navbar navbar-expand navbar-dark" *ngIf="!user && isHome">
   <a class="navbar-brand" routerLink="/" routerLinkActive="active" (click)="toHome()">
-    <img src="../assets/image/logo_transparent.png" class="img-fluid" width="32" height="32" class="d-inline-block align-top">    
+    <img src="../assets/image/logo_transparent.png" class="img-fluid" width="32" height="32" class="d-inline-block align-top">
     Visualization Platform
   </a>
   <div class="navbar-nav">
     <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="toHome()">HOME</a>
     <a class="nav-item nav-link" routerLink="/tutorial" routerLinkActive="active" (click)="toOther()">TUTORIAL</a>
     <a class="nav-item nav-link" routerLink="/api" routerLinkActive="active" (click)="toOther()">API</a>
-    <a class="nav-item nav-link" target="_blank" rel="noopener noreferrer"  href="https://github.com/nonyo555/Visualization-Platform">SOURCE</a>   
+    <a class="nav-item nav-link" target="_blank" rel="noopener noreferrer"  href="https://github.com/nonyo555/Visualization-Platform">SOURCE</a>
   </div>
   <ul class="navbar-nav ml-auto">
     <a class="nav-item nav-link" routerLink="/account/register" routerLinkActive="active" (click)="toOther()">SIGN UP</a>
@@ -37,7 +37,7 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user&&user.role=='admin' || user&&user.role=='superadmin'">
   <a class="navbar-brand" routerLink="/home" routerLinkActive="active">
     <img src="../assets/image/logo_transparent.png" class="img-fluid" width="32" height="32" class="d-inline-block align-top">
-    Visualization Platform    
+    Visualization Platform
   </a>
   <div class="navbar-nav">
       <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">HOME</a>
@@ -45,25 +45,27 @@
       <a class="nav-item nav-link" routerLink="/logs" routerLinkActive="active">LOGS</a>
   </div>
   <ul class="navbar-nav ml-auto">
-    <a class="nav-item nav-link" (click)="logout()">LOG OUT</a>
+    <li class="nav-item"><p class="navbar-text username-text">Signed in as <b>{{user.username}}</b></p></li>
+    <li class="nav-item"><a class="nav-link" (click)="logout()">LOG OUT</a></li>
   </ul>
 </nav>
 
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user&&(user.role=='user'||user.role=='designer')">
   <a class="navbar-brand" routerLink="/home" routerLinkActive="active">
     <img src="../assets/image/logo_transparent.png" class="img-fluid" width="32" height="32" class="d-inline-block align-top">
-    Visualization Platform    
+    Visualization Platform
   </a>
   <div class="navbar-nav">
       <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">HOME</a>
       <a class="nav-item nav-link" routerLink="/tutorial" routerLinkActive="active">TUTORIAL</a>
       <a class="nav-item nav-link" routerLink="/api" routerLinkActive="active">API</a>
-      <a class="nav-item nav-link" target="_blank" rel="noopener noreferrer"  href="https://github.com/nonyo555/Visualization-Platform">SOURCE</a>   
+      <a class="nav-item nav-link" target="_blank" rel="noopener noreferrer"  href="https://github.com/nonyo555/Visualization-Platform">SOURCE</a>
       <a class="nav-item nav-link" routerLink="/generate" routerLinkActive="active">GENERATE</a>
       <a *ngIf="user.role == 'designer'" class="nav-item nav-link" routerLink="/templates" routerLinkActive="active">TEMPLATES</a>
   </div>
   <ul class="navbar-nav ml-auto">
-    <a class="nav-item nav-link" (click)="logout()">LOG OUT</a>
+    <li class="nav-item"><p class="navbar-text username-text">Signed in as <b>{{user.username}}</b></p></li>
+    <li class="nav-item"><a class="nav-link" (click)="logout()">LOG OUT</a></li>
   </ul>
 </nav>
 

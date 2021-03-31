@@ -100,7 +100,7 @@ input strong, button strong, select strong, textarea strong, body strong, .main-
   position: absolute;
 }
 
-.navbar-nav{  
+.navbar-nav{
   margin-left: 5%;
 }
 
@@ -148,4 +148,8 @@ iframe {
   background-size: contain;
   background-position: right center;
   color: white;
+}
+
+.username-text{
+  margin: 0;
 }
