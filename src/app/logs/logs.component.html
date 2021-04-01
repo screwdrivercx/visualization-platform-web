@@ -10,7 +10,7 @@
                         <button type="submit" style="border: none; background-color: transparent;"><mdb-icon fas icon="search" aria-hidden="true"></mdb-icon></button>
                     </form>
                 </div>
-        
+
                 <table *ngIf="logs" mdbTable class="table" #tableEl="mdbTable">
                     <thead>
                         <tr>
@@ -24,19 +24,12 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let log of logs; let i = index">
-                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{log.createdAt}}</td>
-                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.template_id">designer</td>
-                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.file_id">user</td>
-                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.user">admin</td>
+                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{log.createdAt | date: 'medium'}}</td>
+                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{log.role}}</td>
                             <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{log.uid}}</td>
                             <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{log.method}}</td>
-                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.template_id">template</td>
-                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.file_id">file</td>
-                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.user">user</td>
-                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.template_id">{{log.template_id}}</td>
-                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.file_id">{{log.file_id}}</td>
-                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex && log.user">{{log.user}}</td>
-                        </tr>
+                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{log.target}}</td>
+                            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{log.target_id}}</td>
                         <tr *ngIf="!logs">
                             <td colspan="6" class="text-center">
                                 <span class="spinner-border spinner-border-lg align-center"></span>

@@ -32,7 +32,7 @@ export class LogsComponent implements OnInit, AfterViewInit {
         this.previous = this.mdbTable.getDataSource();
       });
   }
-  
+
   ngAfterViewInit() {
     this.mdbTablePagination.setMaxVisibleItemsNumberTo(20);
 
