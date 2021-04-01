@@ -30,6 +30,10 @@ export class TemplateListComponent implements OnInit {
             .pipe(first())
             .subscribe(templates => {
               this.templates = templates;
+              this.templates.forEach(template => {
+                let enc = new TextDecoder("utf-8");
+                template.description = enc.decode(new Uint8Array(template.description.data))
+            });
             });
         });
     }
@@ -45,6 +49,10 @@ export class TemplateListComponent implements OnInit {
         .pipe(first())
         .subscribe(() => {
           this.templates = this.templates.filter(x => x.id !== id);
+          this.templates.forEach(template => {
+            let enc = new TextDecoder("utf-8");
+            template.description = enc.decode(new Uint8Array(template.description.data))
+        });
         });
     }
   }
