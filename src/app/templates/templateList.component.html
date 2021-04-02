@@ -15,7 +15,7 @@
                         <img class="card-img-top" src="{{apiUrl}}/static/{{template.img}}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{template.TemplateName}}</h5>
-                           <div class="card-text" [innerHTML]="template.description.toString()" style="height:48px; overflow-y: hidden;"> </div>
+                           <div class="card-text" [innerHTML]="template.description.toString()" style="height:48px; overflow-y: hidden; overflow-x: hidden;"> </div>
                             <a routerLink="/tutorial/details/{{template.id}}">see details</a>
                             <div class="row pl-3 pr-3 mt-2">
                                 <button class="btn btn-sm btn-primary" routerLink="edit/{{template.id}}">Edit</button>
@@ -36,7 +36,7 @@
                         <img class="card-img-top" src="{{apiUrl}}/static/{{template.img}}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{template.TemplateName}}</h5>
-                            <div class="card-text" [innerHTML]="template.description.toString()" style="height:48px; overflow-y: hidden;">
+                            <div class="card-text" [innerHTML]="template.description.toString()" style="height:48px; overflow-y: hidden; overflow-x: hidden;">
                             </div>
                             <a routerLink="/tutorial/details/{{template.id}}">see details</a>
                             <div class="row pl-3 pr-3 mt-2">
