@@ -204,7 +204,6 @@ export class HomeComponent implements OnInit {
         }
         //userlogs
         let userslogs = {create:[0,0,0,0,0],update:[0,0,0,0,0],delete:[0,0,0,0,0],forgot:[0,0,0,0,0],reset:[0,0,0,0,0]}
-
         datasets.user.forEach(json=>{
             if(json.method == 'CREATE'){
                 userslogs.create[json.diff]+=1;
@@ -224,37 +223,37 @@ export class HomeComponent implements OnInit {
         })
         let designerlogs = {create:[0,0,0,0,0],update:[0,0,0,0,0],delete:[0,0,0,0,0],forgot:[0,0,0,0,0],reset:[0,0,0,0,0]}
         datasets.designer.forEach(json=>{
-            if(json.method == 'create'){
+            if(json.method == 'CREATE'){
                 designerlogs.create[json.diff]+=1;
             }
-            else if(json.method == 'update'){
+            else if(json.method == 'UPDATE'){
                 designerlogs.update[json.diff]+=1;
             }
-            else if(json.method == 'delete'){
+            else if(json.method == 'DELETE'){
                 designerlogs.delete[json.diff]+=1;
             }
-            else if(json.method == 'forgot_password'){
+            else if(json.method =='FORGOT_PASSWORD'){
                 designerlogs.forgot[json.diff]+=1;
             }
-            else if(json.method == 'reset_password'){
+            else if(json.method == 'RESET_PASSWORD'){
                 designerlogs.reset[json.diff]+=1;
             }
         })
         let adminlogs = {create:[0,0,0,0,0],update:[0,0,0,0,0],delete:[0,0,0,0,0],forgot:[0,0,0,0,0],reset:[0,0,0,0,0]}
         datasets.admin.forEach(json=>{
-            if(json.method == 'create'){
+            if(json.method == 'CREATE'){
                 adminlogs.create[json.diff]+=1;
             }
-            else if(json.method == 'update'){
+            else if(json.method == 'UPDATE'){
                 adminlogs.update[json.diff]+=1;
             }
-            else if(json.method == 'delete'){
+            else if(json.method == 'DELETE'){
                 adminlogs.delete[json.diff]+=1;
             }
-            else if(json.method == 'forgot_password'){
+            else if(json.method == 'FORGOT_PASSWORD'){
                 adminlogs.forgot[json.diff]+=1;
             }
-            else if(json.method == 'reset_password'){
+            else if(json.method == 'RESET_PASSWORD'){
                 adminlogs.reset[json.diff]+=1;
             }
         })
