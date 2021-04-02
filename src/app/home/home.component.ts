@@ -127,7 +127,7 @@ export class HomeComponent implements OnInit {
                     this.items = items.reverse();
                 });
         }
-      
+
 
     }
   @ViewChild ('logscatter') div;
@@ -168,7 +168,7 @@ export class HomeComponent implements OnInit {
         .interpolator(d3.interpolateRainbow);
         //preprocess
         let rawdata = this.logs;
-  
+
         //splitData
         let datasets ={
             user:[],
@@ -280,7 +280,7 @@ export class HomeComponent implements OnInit {
             },
             {
                 label:'Forgot Password',
-                backgroundColor:'#FFD700', 
+                backgroundColor:'#FFD700',
                 stack:3,
                 data:userslogs.forgot
             },
@@ -299,7 +299,7 @@ export class HomeComponent implements OnInit {
 				options: {
 					title: {
 						display: true,
-						text: 'User Logs Bar Chart'
+						text: 'User Logs'
 					},
 					tooltips: {
 						mode: 'index',
@@ -320,40 +320,40 @@ export class HomeComponent implements OnInit {
             let barData
             if(role =='Designer'){
                 barData = designerlogs
-                bar.config.options.title.text = 'Designer Logs Bar Chart'
+                bar.config.options.title.text = 'Designer Logs'
             }
             else if(role == 'Admin'){
                 barData = adminlogs
-                bar.config.options.title.text = 'Admin Logs Bar Chart'
+                bar.config.options.title.text = 'Admin Logs'
             }
             else if (role == 'User'){
                 barData = userslogs
-                bar.config.options.title.text = 'User Logs Bar Chart'
+                bar.config.options.title.text = 'User Logs'
             }
             console.log(role)
             let barchartNew = {
                 labels:uniqueDate,
                 datasets:[{
                     label:'Create',
-                    backgroundColor:'#DC143C', 
+                    backgroundColor:'#DC143C',
                     stack:0,
                     data:barData.create
                 },
                 {
                     label:'Update',
-                    backgroundColor:'#48D1CC', 
+                    backgroundColor:'#48D1CC',
                     stack:1,
                     data:barData.update
                 },
                 {
                     label:'Delete',
-                    backgroundColor:'#00FA9A', 
+                    backgroundColor:'#00FA9A',
                     stack:2,
                     data:barData.delete
                 },
                 {
                     label:'Forgot Password',
-                    backgroundColor:'#FFD700', 
+                    backgroundColor:'#FFD700',
                     stack:3,
                     data:barData.forgot
                 },
@@ -381,17 +381,17 @@ export class HomeComponent implements OnInit {
         .append('button')
           .text(d=> {return d})
           .attr('class','labelBt')
-          .attr('clicked',(d,i)=> { 
+          .attr('clicked',(d,i)=> {
             if(i==0){
             return true
           }
             return false})
-          .style('color',(d,i)=> { 
+          .style('color',(d,i)=> {
             if(i==0){
             return 'white'
           }
             return 'black'})
-          .style('background-color',(d,i)=> { 
+          .style('background-color',(d,i)=> {
             if(i==0){
             return 'black'
           }
@@ -408,7 +408,7 @@ export class HomeComponent implements OnInit {
                 .style('background-color','white')
                 .attr('clicked',false);
             d3.select(this)
-                .attr('clicked',true) 
+                .attr('clicked',true)
                 .style('color','white')
                 .style('background-color','black')
            render(d3.select(this).text())
@@ -429,7 +429,7 @@ export class HomeComponent implements OnInit {
               .style('color','white')
               .style('background-color','black')
             }
-            }      
+            }
 }
 
 }
