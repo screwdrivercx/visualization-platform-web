@@ -4,10 +4,10 @@ import { environment } from 'src/environments/environment';
 import { User } from '../_models';
 import { AccountService, AlertService, VgenService, TemplateService, AnnouncementService } from '../_services';
 import { OwlOptions } from 'ngx-owl-carousel-o'
-import * as d3 from 'd3';
+import * as d3 from 'node_modules/d3';
 import * as moment from 'node_modules/moment';
 import * as Chart from 'node_modules/chart.js'
-import { relative } from '@angular/compiler-cli/src/ngtsc/file_system';
+
 @Component({
 templateUrl: 'home.component.html',
  styleUrls: ['./home.component.css']},
@@ -155,14 +155,13 @@ export class HomeComponent implements OnInit {
     }
 
     createLogScatter(divAdmin:HTMLElement) :void{
-       // let chart = divAdmin.getElementByClassName('chartContainer');
        d3.select(divAdmin)
         .style('position','absolute')
-        .style('left','20vw')
+        .style('left','15vw')
         .style("align-content", "center")
         d3.select(divAdmin).select('#chartContainer').append('canvas')
             .attr('id','canvas')
-            .attr('width',1000)
+            .attr('width',1400)
             .style('height',800)
         let Rainbowcolor =d3.scaleSequential()
         .domain([0, 100])
@@ -186,15 +185,15 @@ export class HomeComponent implements OnInit {
                 }
                 let test = Math.random()*3|0;
                 //rawdata.role  == 'user'
-                if(test == 0){
+                if(rawdata[i].role  == 'user'){
                     rawdata[i]['diff'] = diff;
                     datasets.user.push(rawdata[i])
                 }
-                else if(test == 1){
+                else if(rawdata[i].role  == 'designer'){
                     rawdata[i]['diff'] = diff;
                     datasets.designer.push(rawdata[i])
                 }
-                else if(test == 2){
+                else if(rawdata[i].role  == 'admin'){
                     rawdata[i]['diff'] = diff;
                     datasets.admin.push(rawdata[i])
                 }
@@ -207,20 +206,19 @@ export class HomeComponent implements OnInit {
         let userslogs = {create:[0,0,0,0,0],update:[0,0,0,0,0],delete:[0,0,0,0,0],forgot:[0,0,0,0,0],reset:[0,0,0,0,0]}
 
         datasets.user.forEach(json=>{
-
-            if(json.method == 'create'){
+            if(json.method == 'CREATE'){
                 userslogs.create[json.diff]+=1;
             }
-            else if(json.method == 'update'){
+            else if(json.method == 'UPDATE'){
                 userslogs.update[json.diff]+=1;
             }
-            else if(json.method == 'delete'){
+            else if(json.method == 'DELETE'){
                 userslogs.delete[json.diff]+=1;
             }
-            else if(json.method == 'forgot_password'){
+            else if(json.method == 'FORGOT_PASSWORD'){
                 userslogs.forgot[json.diff]+=1;
             }
-            else if(json.method == 'reset_password'){
+            else if(json.method == 'RESET_PASSWORD'){
                 userslogs.reset[json.diff]+=1;
             }
         })
@@ -265,37 +263,36 @@ export class HomeComponent implements OnInit {
             labels:uniqueDate,
             datasets:[{
                 label:'Create',
-                backgroundColor:'red', //#FF0000
+                backgroundColor:'#DC143C',
                 stack:0,
                 data:userslogs.create
             },
             {
                 label:'Update',
-                backgroundColor:'blue', //#FF0000
+                backgroundColor:'#48D1CC',
                 stack:1,
                 data:userslogs.update
             },
             {
                 label:'Delete',
-                backgroundColor:'green', //#FF0000
+                backgroundColor:'#00FA9A',
                 stack:2,
                 data:userslogs.delete
             },
             {
                 label:'Forgot Password',
-                backgroundColor:'yellow', //#FF0000
+                backgroundColor:'#FFD700', 
                 stack:3,
                 data:userslogs.forgot
             },
             {
                 label:'Reset Password',
-                backgroundColor:'pink', //#FF0000
+                backgroundColor:'#FFD700',
                 stack:3,
                 data:userslogs.reset
             }
         ]
         }
-
 			var ctx = document.getElementsByTagName('canvas')[0].getContext('2d');
 			var bar = new Chart(ctx, {
 				type: 'bar',
@@ -320,54 +317,57 @@ export class HomeComponent implements OnInit {
 					}
 				}
 			});
-		
         function render(role:string){
             let barData
             if(role =='Designer'){
                 barData = designerlogs
+                bar.config.options.title.text = 'Designer Logs Bar Chart'
             }
             else if(role == 'Admin'){
                 barData = adminlogs
+                bar.config.options.title.text = 'Admin Logs Bar Chart'
             }
             else if (role == 'User'){
                 barData = userslogs
+                bar.config.options.title.text = 'User Logs Bar Chart'
             }
             console.log(role)
             let barchartNew = {
                 labels:uniqueDate,
                 datasets:[{
                     label:'Create',
-                    backgroundColor:'red', //#FF0000
+                    backgroundColor:'#DC143C', 
                     stack:0,
                     data:barData.create
                 },
                 {
                     label:'Update',
-                    backgroundColor:'blue', //#FF0000
+                    backgroundColor:'#48D1CC', 
                     stack:1,
                     data:barData.update
                 },
                 {
                     label:'Delete',
-                    backgroundColor:'green', //#FF0000
+                    backgroundColor:'#00FA9A', 
                     stack:2,
                     data:barData.delete
                 },
                 {
                     label:'Forgot Password',
-                    backgroundColor:'yellow', //#FF0000
+                    backgroundColor:'#FFD700', 
                     stack:3,
                     data:barData.forgot
                 },
                 {
                     label:'Reset Password',
-                    backgroundColor:'pink', //#FF0000
+                    backgroundColor:'#EE82EE',
                     stack:3,
                     data:barData.reset
                 }
             ]
             }
             console.log(bar)
+
             bar.config.data =barchartNew;
             bar.update();
         }
