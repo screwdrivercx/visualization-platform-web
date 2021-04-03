@@ -176,8 +176,9 @@ export class HomeComponent implements OnInit {
             designer:[]
         }
         let uniqueDate =[]
+
         for (let i = 0; i < rawdata.length; i++) {
-            let diff = moment(rawdata[0].createdAt).diff(moment(rawdata[i].createdAt),'days')
+            let diff = moment(rawdata[0].createdAt).diff(moment(rawdata[i].createdAt),'days');
             if(diff<5){
                 let date  = moment(rawdata[i].createdAt).format("ll");
                 if(!uniqueDate.includes(date)){
@@ -193,7 +194,7 @@ export class HomeComponent implements OnInit {
                     rawdata[i]['diff'] = diff;
                     datasets.designer.push(rawdata[i])
                 }
-                else if(rawdata[i].role  == 'admin'){
+                else if(rawdata[i].role  == 'admin' || rawdata[i].role == 'superadmin'){
                     rawdata[i]['diff'] = diff;
                     datasets.admin.push(rawdata[i])
                 }
@@ -202,6 +203,11 @@ export class HomeComponent implements OnInit {
                 break;
             }
         }
+
+        uniqueDate = uniqueDate.reverse();
+        datasets.admin = datasets.admin.reverse();
+        datasets.designer = datasets.designer.reverse();
+        datasets.user = datasets.user.reverse();
         //userlogs
         let userslogs = {create:[0,0,0,0,0],update:[0,0,0,0,0],delete:[0,0,0,0,0],forgot:[0,0,0,0,0],reset:[0,0,0,0,0]}
         datasets.user.forEach(json=>{
@@ -257,7 +263,6 @@ export class HomeComponent implements OnInit {
                 adminlogs.reset[json.diff]+=1;
             }
         })
-
         let barchartUser = {
             labels:uniqueDate,
             datasets:[{
@@ -330,12 +335,11 @@ export class HomeComponent implements OnInit {
                 barData = userslogs
                 bar.config.options.title.text = 'User Logs'
             }
-            console.log(role)
             let barchartNew = {
                 labels:uniqueDate,
                 datasets:[{
                     label:'Create',
-                    backgroundColor:'#DC143C',
+                    backgroundColor:'#00FA9A',
                     stack:0,
                     data:barData.create
                 },
@@ -347,7 +351,7 @@ export class HomeComponent implements OnInit {
                 },
                 {
                     label:'Delete',
-                    backgroundColor:'#00FA9A',
+                    backgroundColor:'#DC143C',
                     stack:2,
                     data:barData.delete
                 },
@@ -365,7 +369,6 @@ export class HomeComponent implements OnInit {
                 }
             ]
             }
-            console.log(bar)
 
             bar.config.data =barchartNew;
             bar.update();
