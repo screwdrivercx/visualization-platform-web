@@ -196,7 +196,7 @@ export class AddEditComponent implements OnInit {
                 dataFileSource: [''],
                 configFileSource: ['']
             });
-           
+
             this.templateService.getFile(this.id)
                 .subscribe(res => {
                     let enc = new TextDecoder("utf-8");
@@ -209,9 +209,9 @@ export class AddEditComponent implements OnInit {
                     this.form.patchValue({
                         templateName : this.preconfig["TemplateName"],
                         description : enc.decode(new Uint8Array(this.preconfig["description"].data))
-                        
+
                     })
-                    this.imgUrl = this.apiUrl + "/static/" + this.preconfig["img"]
+                    this.imgUrl = this.apiUrl + '/static/' + this.preconfig["TemplateName"] + '/' + this.preconfig["img"];
                 })
         }
 
@@ -286,7 +286,7 @@ export class AddEditComponent implements OnInit {
 
             formData.append('templateName', this.form.get("templateName").value);
             formData.append('description', this.form.get('description').value);
-            
+
             this.isImgFileChange && this.form.get("imgFileSource").value != '' ?
                 formData.append('image', this.form.get("imgFileSource").value) :
                 formData.append('image', '');

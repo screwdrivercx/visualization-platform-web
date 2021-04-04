@@ -12,7 +12,7 @@
             <div class="row d-flex justify-content-start ml-5">
                 <div *ngFor="let template of templates">
                     <div *ngIf="template.status=='active'" class="card m-5" style="width: 20rem;">
-                        <img class="card-img-top" src="{{apiUrl}}/static/{{template.img}}" alt="Card image cap">
+                        <img class="card-img-top" src="{{apiUrl}}/static/{{template.TemplateName}}/{{template.img}}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{template.TemplateName}}</h5>
                            <div class="card-text" [innerHTML]="template.description.toString()" style="height:48px; overflow-y: hidden; overflow-x: hidden;"> </div>
@@ -33,7 +33,7 @@
                     </div>
                     <div *ngIf="template.status=='inactive'" class="card m-5"
                         style="width: 20rem;background-color: rgba(245, 245, 245, 1);opacity: .5;">
-                        <img class="card-img-top" src="{{apiUrl}}/static/{{template.img}}" alt="Card image cap">
+                        <img class="card-img-top" src="{{apiUrl}}/static/{{template.TemplateName}}/{{template.img}}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{template.TemplateName}}</h5>
                             <div class="card-text" [innerHTML]="template.description.toString()" style="height:48px; overflow-y: hidden; overflow-x: hidden;">

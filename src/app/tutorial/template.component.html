@@ -3,7 +3,7 @@
     <div class="card-body">
             <div class="col-md-8 offset-md-2 mb-5 mt-5">
                 <div [innerHTML]="template.description"></div>
-            <img class="card-img-top mt-5 mb-5" src="{{apiUrl}}/static/{{template.img}}">
+            <img class="card-img-top mt-5 mb-5" src="{{apiUrl}}/static/{{template.TemplateName}}/{{template.img}}">
             <table class="table table-hover my-5">
                 <thead>
                     <tr>
@@ -16,14 +16,14 @@
                         <td><strong>Example data</strong></td>
                         <td>
                             <a
-                                href="{{apiUrl}}/static/example-files/{{template.data}}">{{template.data}}</a><br>
+                                href="{{apiUrl}}/static/example-files/{{template.TemplateName}}/{{template.data}}">{{template.data}}</a><br>
                         </td>
                     </tr>
                     <tr>
                         <td><strong>Example config</strong></td>
                         <td>
                             <a
-                                href="{{apiUrl}}/static/example-files/{{template.config}}">{{template.config}}</a><br>
+                                href="{{apiUrl}}/static/example-files/{{template.TemplateName}}/{{template.config}}">{{template.config}}</a><br>
                         </td>
                     </tr>
                 </tbody>
