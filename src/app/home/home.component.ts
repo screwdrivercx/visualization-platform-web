@@ -167,8 +167,7 @@ export class HomeComponent implements OnInit {
         .domain([0, 100])
         .interpolator(d3.interpolateRainbow);
         //preprocess
-        let rawdata = this.logs;
-
+        let rawdata = this.logs.reverse();
         //splitData
         let datasets ={
             user:[],
@@ -178,7 +177,7 @@ export class HomeComponent implements OnInit {
         let uniqueDate =[]
 
         for (let i = 0; i < rawdata.length; i++) {
-            let diff = moment(rawdata[0].createdAt).diff(moment(rawdata[i].createdAt),'days');
+            let diff =  Math.abs(moment(rawdata[0].createdAt).diff(moment(rawdata[i].createdAt),'days'));
             if(diff<5){
                 let date  = moment(rawdata[i].createdAt).format("ll");
                 if(!uniqueDate.includes(date)){
@@ -203,10 +202,10 @@ export class HomeComponent implements OnInit {
             }
         }
        
-        uniqueDate = uniqueDate.reverse();
-        datasets.admin = datasets.admin.reverse();
-        datasets.designer = datasets.designer.reverse();
-        datasets.user = datasets.user.reverse();
+        // uniqueDate = uniqueDate.reverse();
+        // datasets.admin = datasets.admin.reverse();
+        // datasets.designer = datasets.designer.reverse();
+        // datasets.user = datasets.user.reverse();
         //userlogs
         let userslogs = {create:[0,0,0,0,0],update:[0,0,0,0,0],delete:[0,0,0,0,0],forgot:[0,0,0,0,0],reset:[0,0,0,0,0]}
         datasets.user.forEach(json=>{
@@ -269,31 +268,31 @@ export class HomeComponent implements OnInit {
                 label:'Create',
                 backgroundColor:'#00FA9A',
                 stack:0,
-                data:userslogs.create.reverse()
+                data:userslogs.create
             },
             {
                 label:'Update',
                 backgroundColor:'#48D1CC',
                 stack:1,
-                data:userslogs.update.reverse()
+                data:userslogs.update
             },
             {
                 label:'Delete',
                 backgroundColor:'#DC143C',
                 stack:2,
-                data:userslogs.delete.reverse()
+                data:userslogs.delete
             },
             {
                 label:'Forgot Password',
                 backgroundColor:'#FFD700',
                 stack:3,
-                data:userslogs.forgot.reverse()
+                data:userslogs.forgot
             },
             {
                 label:'Reset Password',
                 backgroundColor:'#EE82EE',
                 stack:3,
-                data:userslogs.reset.reverse()
+                data:userslogs.reset
             }
         ]
         }
@@ -341,31 +340,31 @@ export class HomeComponent implements OnInit {
                     label:'Create',
                     backgroundColor:'#00FA9A',
                     stack:0,
-                    data:barData.create.reverse()
+                    data:barData.create
                 },
                 {
                     label:'Update',
                     backgroundColor:'#48D1CC',
                     stack:1,
-                    data:barData.update.reverse()
+                    data:barData.update
                 },
                 {
                     label:'Delete',
                     backgroundColor:'#DC143C',
                     stack:2,
-                    data:barData.delete.reverse()
+                    data:barData.delete
                 },
                 {
                     label:'Forgot Password',
                     backgroundColor:'#FFD700',
                     stack:3,
-                    data:barData.forgot.reverse()
+                    data:barData.forgot
                 },
                 {
                     label:'Reset Password',
                     backgroundColor:'#EE82EE',
                     stack:3,
-                    data:barData.reset.reverse()
+                    data:barData.reset
                 }
             ]
             }
