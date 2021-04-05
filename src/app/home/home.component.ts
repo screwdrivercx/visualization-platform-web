@@ -184,7 +184,6 @@ export class HomeComponent implements OnInit {
                 if(!uniqueDate.includes(date)){
                     uniqueDate.push(date)
                 }
-                let test = Math.random()*3|0;
                 //rawdata.role  == 'user'
                 if(rawdata[i].role  == 'user'){
                     rawdata[i]['diff'] = diff;
@@ -203,7 +202,7 @@ export class HomeComponent implements OnInit {
                 break;
             }
         }
-
+       
         uniqueDate = uniqueDate.reverse();
         datasets.admin = datasets.admin.reverse();
         datasets.designer = datasets.designer.reverse();
@@ -245,6 +244,7 @@ export class HomeComponent implements OnInit {
                 designerlogs.reset[json.diff]+=1;
             }
         })
+        console.log(designerlogs)
         let adminlogs = {create:[0,0,0,0,0],update:[0,0,0,0,0],delete:[0,0,0,0,0],forgot:[0,0,0,0,0],reset:[0,0,0,0,0]}
         datasets.admin.forEach(json=>{
             if(json.method == 'CREATE'){
@@ -267,33 +267,33 @@ export class HomeComponent implements OnInit {
             labels:uniqueDate,
             datasets:[{
                 label:'Create',
-                backgroundColor:'#DC143C',
+                backgroundColor:'#00FA9A',
                 stack:0,
-                data:userslogs.create
+                data:userslogs.create.reverse()
             },
             {
                 label:'Update',
                 backgroundColor:'#48D1CC',
                 stack:1,
-                data:userslogs.update
+                data:userslogs.update.reverse()
             },
             {
                 label:'Delete',
-                backgroundColor:'#00FA9A',
+                backgroundColor:'#DC143C',
                 stack:2,
-                data:userslogs.delete
+                data:userslogs.delete.reverse()
             },
             {
                 label:'Forgot Password',
                 backgroundColor:'#FFD700',
                 stack:3,
-                data:userslogs.forgot
+                data:userslogs.forgot.reverse()
             },
             {
                 label:'Reset Password',
-                backgroundColor:'#FFD700',
+                backgroundColor:'#EE82EE',
                 stack:3,
-                data:userslogs.reset
+                data:userslogs.reset.reverse()
             }
         ]
         }
@@ -341,31 +341,31 @@ export class HomeComponent implements OnInit {
                     label:'Create',
                     backgroundColor:'#00FA9A',
                     stack:0,
-                    data:barData.create
+                    data:barData.create.reverse()
                 },
                 {
                     label:'Update',
                     backgroundColor:'#48D1CC',
                     stack:1,
-                    data:barData.update
+                    data:barData.update.reverse()
                 },
                 {
                     label:'Delete',
                     backgroundColor:'#DC143C',
                     stack:2,
-                    data:barData.delete
+                    data:barData.delete.reverse()
                 },
                 {
                     label:'Forgot Password',
                     backgroundColor:'#FFD700',
                     stack:3,
-                    data:barData.forgot
+                    data:barData.forgot.reverse()
                 },
                 {
                     label:'Reset Password',
                     backgroundColor:'#EE82EE',
                     stack:3,
-                    data:barData.reset
+                    data:barData.reset.reverse()
                 }
             ]
             }
